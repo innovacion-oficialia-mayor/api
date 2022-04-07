@@ -9,7 +9,8 @@ use Illuminate\Support\Str;
 
 class AdminRolesSeeder extends Seeder {
   /**
-   * Roles del sitio web.
+   * Ejecuta el seeder de la tabla roles
+   * de la base de datos de administración.
    *
    * @return void
    */

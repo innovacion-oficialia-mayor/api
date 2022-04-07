@@ -14,6 +14,7 @@ class AdminSeeder extends Seeder {
   public function run() {
     $this->call([
       AdminRolesSeeder::class,
+      AdminSexosSeeder::class,
     ]);
   }
 }
