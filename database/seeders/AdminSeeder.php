@@ -15,6 +15,7 @@ class AdminSeeder extends Seeder {
     $this->call([
       AdminRolesSeeder::class,
       AdminSexosSeeder::class,
+      AdminPuestosSeeder::class,
     ]);
   }
 }
