@@ -18,6 +18,7 @@ class AdminSeeder extends Seeder {
       AdminPuestosSeeder::class,
       AdminNivelesSeeder::class,
       AdminTiposNomina::class,
+      AdminCategoriasNomina::class,
     ]);
   }
 }
