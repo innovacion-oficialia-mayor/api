@@ -14,6 +14,7 @@ class ClimaSeeder extends Seeder {
   public function run() {
     $this->call([
       ClimaRubrosSeeder::class,
+      ClimaOpcionesSeeder::class,
     ]);
   }
 }

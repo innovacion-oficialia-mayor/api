@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
   /**
-   * Ejecuta la migración de la tabla rubros
+   * Ejecuta la migración de la tabla opciones
    * de la base de datos de clima laboral.
    *
    * @return void
@@ -14,7 +14,7 @@ return new class extends Migration {
   protected $connection = 'clima';
 
   public function up() {
-    Schema::create('rubros', function (Blueprint $table) {
+    Schema::create('opciones', function (Blueprint $table) {
       $table->unsignedTinyInteger('id')->primary();
       $table->string('nombre', 255)->unique();
     });
@@ -26,6 +26,6 @@ return new class extends Migration {
    * @return void
    */
   public function down() {
-    Schema::dropIfExists('rubros');
+    Schema::dropIfExists('opciones');
   }
 };
