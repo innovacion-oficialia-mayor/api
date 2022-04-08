@@ -6,13 +6,13 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
   /**
-   * Ejecuta la migración de la tabla niveles
+   * Ejecuta la migración de la tabla niveles_puesto
    * de la base de datos de administración.
    *
    * @return void
    */
   public function up() {
-    Schema::create('niveles', function (Blueprint $table) {
+    Schema::create('niveles_puesto', function (Blueprint $table) {
       $table->unsignedTinyInteger('id')->primary();
       $table->string('nombre', 5)->unique();
     });
@@ -24,6 +24,6 @@ return new class extends Migration {
    * @return void
    */
   public function down() {
-    Schema::dropIfExists('niveles');
+    Schema::dropIfExists('niveles_puesto');
   }
 };

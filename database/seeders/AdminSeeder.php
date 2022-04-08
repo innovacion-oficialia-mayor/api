@@ -16,10 +16,11 @@ class AdminSeeder extends Seeder {
       AdminRolesSeeder::class,
       AdminSexosSeeder::class,
       AdminPuestosSeeder::class,
-      AdminNivelesSeeder::class,
-      AdminTiposNomina::class,
-      AdminCategoriasNomina::class,
-      AdminTiposDependencia::class,
+      AdminNivelesPuestoSeeder::class,
+      AdminTiposNominaSeeder::class,
+      AdminCategoriasNominaSeeder::class,
+      AdminTiposDependenciaSeeder::class,
+      AdminAreasDependenciaSeeder::class,
     ]);
   }
 }

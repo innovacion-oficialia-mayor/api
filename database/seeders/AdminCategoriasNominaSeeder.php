@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class AdminCategoriasNomina extends Seeder {
+class AdminCategoriasNominaSeeder extends Seeder {
   /**
    * Ejecuta el seeder de la tabla categorias_nomina
    * de la base de datos de administración.

@@ -6,15 +6,15 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class AdminNivelesSeeder extends Seeder {
+class AdminNivelesPuestoSeeder extends Seeder {
   /**
-   * Ejecuta el seeder de la tabla niveles
+   * Ejecuta el seeder de la tabla niveles_puesto
    * de la base de datos de administración.
    *
    * @return void
    */
   public function run() {
-    DB::table('niveles')->insert([
+    DB::table('niveles_puesto')->insert([
       ['id' => 1,  'nombre' => '1'],
       ['id' => 2,  'nombre' => '2'],
       ['id' => 3,  'nombre' => '3'],
