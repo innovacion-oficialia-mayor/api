@@ -15,6 +15,7 @@ class ClimaSeeder extends Seeder {
     $this->call([
       ClimaRubrosSeeder::class,
       ClimaOpcionesSeeder::class,
+      ClimaCategoriasSeeder::class,
     ]);
   }
 }
