@@ -13,8 +13,11 @@ return new class extends Migration {
    */
   public function up() {
     Schema::create('niveles_puesto', function (Blueprint $table) {
-      $table->unsignedTinyInteger('id')->primary();
-      $table->string('nombre', 5)->unique();
+      $table->unsignedTinyInteger('id')
+            ->primary();
+
+      $table->string('nombre', 5)
+            ->unique();
     });
   }
 

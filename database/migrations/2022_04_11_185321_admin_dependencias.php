@@ -13,15 +13,19 @@ return new class extends Migration {
    */
   public function up() {
     Schema::create('dependencias', function (Blueprint $table) {
-      $table->unsignedTinyInteger('id')->primary();
-      $table->string('nombre', 255)->unique();
+      $table->unsignedTinyInteger('id')
+            ->primary();
+
+      $table->string('nombre', 255)
+            ->unique();
 
       $table->unsignedTinyInteger('id_tipo_dependencia');
 
       $table->foreign('id_tipo_dependencia')
-        ->references('id')->on('tipos_dependencia')
-        ->restrictOnUpdate()
-        ->restrictOnDelete();
+            ->references('id')
+            ->on('tipos_dependencia')
+            ->restrictOnUpdate()
+            ->restrictOnDelete();
     });
   }
 

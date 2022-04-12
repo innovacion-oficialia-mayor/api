@@ -7,15 +7,15 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class AdminAreasDependenciaSeeder extends Seeder {
+class AdminAreasSeeder extends Seeder {
   /**
-   * Ejecuta el seeder de la tabla areas_dependencia
+   * Ejecuta el seeder de la tabla areas
    * de la base de datos de administración.
    *
    * @return void
    */
   public function run() {
-    DB::table('areas_dependencia')->insert([
+    DB::table('areas')->insert([
       ['id' =>  1, 'nombre' => Str::upper('administración del rastro municipal')],
       ['id' =>  2, 'nombre' => Str::upper('administrativo')],
       ['id' =>  3, 'nombre' => Str::upper('centro comunitario')],

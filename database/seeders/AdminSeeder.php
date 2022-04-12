@@ -20,7 +20,7 @@ class AdminSeeder extends Seeder {
       AdminTiposNominaSeeder::class,
       AdminCategoriasNominaSeeder::class,
       AdminTiposDependenciaSeeder::class,
-      AdminAreasDependenciaSeeder::class,
+      AdminAreasSeeder::class,
       AdminTiposCategoriasNominaSeeder::class,
       AdminDependenciasSeeder::class,
     ]);

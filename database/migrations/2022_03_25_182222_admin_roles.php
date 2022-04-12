@@ -13,9 +13,14 @@ return new class extends Migration {
    */
   public function up() {
     Schema::create('roles', function (Blueprint $table) {
-      $table->unsignedTinyInteger('id')->primary();
-      $table->string('nombre', 20)->unique();
-      $table->string('descripcion', 255)->unique();
+      $table->unsignedTinyInteger('id')
+            ->primary();
+
+      $table->string('nombre', 20)
+            ->unique();
+
+      $table->string('descripcion', 255)
+            ->unique();
     });
   }
 

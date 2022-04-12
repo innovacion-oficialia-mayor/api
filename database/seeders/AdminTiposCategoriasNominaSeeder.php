@@ -18,5 +18,9 @@ class AdminTiposCategoriasNominaSeeder extends Seeder {
       ['id' => 1, 'id_tipo_nomina' => 1, 'id_categoria_nomina' => 1],
       ['id' => 2, 'id_tipo_nomina' => 1, 'id_categoria_nomina' => 2],
     ]);
+
+    DB::table('tipos_categorias_nomina')->insert([
+      ['id' => 3, 'id_tipo_nomina' => 2],
+    ]);
   }
 }

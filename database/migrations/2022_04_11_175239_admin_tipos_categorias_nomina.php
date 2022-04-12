@@ -13,21 +13,25 @@ return new class extends Migration {
    */
   public function up() {
     Schema::create('tipos_categorias_nomina', function (Blueprint $table) {
-      $table->unsignedTinyInteger('id')->primary();
+      $table->unsignedTinyInteger('id')
+            ->primary();
 
       $table->unsignedTinyInteger('id_tipo_nomina');
 
       $table->foreign('id_tipo_nomina')
-        ->references('id')->on('tipos_nomina')
-        ->restrictOnUpdate()
-        ->restrictOnDelete();
+            ->references('id')
+            ->on('tipos_nomina')
+            ->restrictOnUpdate()
+            ->restrictOnDelete();
 
-      $table->unsignedTinyInteger('id_categoria_nomina');
+      $table->unsignedTinyInteger('id_categoria_nomina')
+            ->nullable();
 
       $table->foreign('id_categoria_nomina')
-        ->references('id')->on('categorias_nomina')
-        ->restrictOnUpdate()
-        ->restrictOnDelete();
+            ->references('id')
+            ->on('categorias_nomina')
+            ->restrictOnUpdate()
+            ->restrictOnDelete();
     });
   }
 

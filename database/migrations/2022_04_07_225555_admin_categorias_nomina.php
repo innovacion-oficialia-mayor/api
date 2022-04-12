@@ -13,8 +13,11 @@ return new class extends Migration {
    */
   public function up() {
     Schema::create('categorias_nomina', function (Blueprint $table) {
-      $table->unsignedTinyInteger('id')->primary();
-      $table->string('nombre', 20)->unique();
+      $table->unsignedTinyInteger('id')
+            ->primary();
+
+      $table->string('nombre', 20)
+            ->unique();
     });
   }
 
