@@ -23,6 +23,7 @@ class AdminSeeder extends Seeder {
       AdminAreasSeeder::class,
       AdminTiposCategoriasNominaSeeder::class,
       AdminDependenciasSeeder::class,
+      AdminAreasDependenciasSeeder::class,
     ]);
   }
 }
