@@ -17,6 +17,7 @@ class ClimaSeeder extends Seeder {
       ClimaOpcionesSeeder::class,
       ClimaCategoriasSeeder::class,
       ClimaPreguntasSeeder::class,
+      ClimaOpcionesPreguntasSeeder::class,
     ]);
   }
 }
