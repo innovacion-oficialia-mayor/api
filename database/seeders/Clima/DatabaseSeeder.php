@@ -1,21 +1,20 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Clima;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder {
   /**
-   * Ejecuta todos los seeders
-   * de todas las bases de datos.
+   * Ejecuta todos los seeders de la
+   * base de datos de Clima Laboral.
    *
    * @return void
    */
   public function run() {
     $this->call([
-      Admin\DatabaseSeeder::class,
-      Clima\DatabaseSeeder::class,
+      //
     ]);
   }
 }
