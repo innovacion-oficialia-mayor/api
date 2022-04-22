@@ -13,7 +13,7 @@ return new class extends Migration {
    */
   public function up() {
     Schema::create('areas', function (Blueprint $table) {
-     $table->tinyIncrements('id');
+      $table->tinyIncrements('id');
 
       $table->string('name', 255)
             ->unique();
