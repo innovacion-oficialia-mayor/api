@@ -17,6 +17,10 @@ class DatabaseSeeder extends Seeder {
       RoleSeeder::class,
       GenderSeeder::class,
       JobSeeder::class,
+      JobLevelSeeder::class,
+      PayrollTypeSeeder::class,
+      PayrollCategorySeeder::class,
+      DependencyTypeSeeder::class,
     ]);
   }
 }
