@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder {
       PayrollTypeSeeder::class,
       PayrollCategorySeeder::class,
       DependencyTypeSeeder::class,
+      AreaSeeder::class,
     ]);
   }
 }
