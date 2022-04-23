@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder {
       HeadingSeeder::class,
       OptionSeeder::class,
       FactorSeeder::class,
+      QuestionSeeder::class,
     ]);
   }
 }

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
   /**
-   * Ejecuta la migración de la tabla factors
+   * Ejecuta la migración de la tabla questions
    * de las base de datos de Clima Laboral.
    *
    * @return void
@@ -14,19 +14,18 @@ return new class extends Migration {
   protected $connection = 'clima';
 
   public function up() {
-    Schema::create('factors', function (Blueprint $table) {
+    Schema::create('questions', function (Blueprint $table) {
       $table->tinyIncrements('id');
 
-      $table->unsignedTinyInteger('heading_id');
+      $table->unsignedTinyInteger('factor_id');
 
-      $table->foreign('heading_id')
+      $table->foreign('factor_id')
             ->references('id')
-            ->on('headings')
+            ->on('factors')
             ->restrictOnUpdate()
             ->restrictOnDelete();
 
-      $table->string('name', 255)
-            ->unique();
+      $table->string('body', 560);
     });
   }
 
@@ -36,6 +35,6 @@ return new class extends Migration {
    * @return void
    */
   public function down() {
-    Schema::dropIfExists('factors');
+    Schema::dropIfExists('questions');
   }
 };
