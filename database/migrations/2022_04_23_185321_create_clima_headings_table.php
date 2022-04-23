@@ -6,19 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
   /**
-   * Ejecuta la migración de la tabla roles
-   * de las base de datos de Administración.
+   * Ejecuta la migración de la tabla headings
+   * de las base de datos de Clima Laboral.
    *
    * @return void
    */
+  protected $connection = 'clima';
+
   public function up() {
-    Schema::create('roles', function (Blueprint $table) {
+    Schema::create('headings', function (Blueprint $table) {
       $table->tinyIncrements('id');
 
-      $table->string('name', 20)
-            ->unique();
-
-      $table->string('description', 255)
+      $table->string('name', 255)
             ->unique();
     });
   }
@@ -29,6 +28,6 @@ return new class extends Migration {
    * @return void
    */
   public function down() {
-    Schema::dropIfExists('roles');
+    Schema::dropIfExists('headings');
   }
 };
