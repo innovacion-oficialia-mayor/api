@@ -39,13 +39,29 @@ CREATE DATABASE IF NOT EXISTS clima
 * [Por qué es necesaria la GPL Affero.](https://www.gnu.org/licenses/why-affero-gpl.html)
 * [Cómo utilizar las licencias de GNU para su propio software.](https://www.gnu.org/licenses/gpl-howto.es.html)
 * [Documentación oficial de Lumen.](https://lumen.laravel.com/docs/9.x)
-* [Conceptos de la arquitectura de Laravel.](https://laravel.com/docs/9.x/lifecycle)
-* [Iniciando con Laravel.](https://laravel.com/docs/9.x/installation)
+* [Documentación oficial de Laravel.](https://laravel.com/docs/9.x/)
+* [Configuración de Lumen.](https://lumen.laravel.com/docs/9.x/configuration)
+* [Configuración de Laravel.](https://laravel.com/docs/9.x/configuration)
+* [Instalación de Lumen.](https://lumen.laravel.com/docs/9.x/installation)
+* [Estructura de directorios de Laravel.](https://laravel.com/docs/9.x/structure)
+* [Despliegue de aplicaciones Laravel.](https://laravel.com/docs/9.x/deployment)
+* [Ciclo de vida de las peticiones con Laravel.](https://laravel.com/docs/9.x/lifecycle)
+* [Contenedor de servicios de Laravel.](https://laravel.com/docs/9.x/container)
+* [Proveedor de servicios de Laravel.](https://laravel.com/docs/9.x/providers)
+* [Facades de Laravel](https://laravel.com/docs/9.x/facades)
+* [Rutas con Lumen.](https://lumen.laravel.com/docs/9.x/routing)
 * [Rutas con Laravel.](https://laravel.com/docs/9.x/routing)
+* [Control de acceso HTTP (CORS).](https://developer.mozilla.org/es/docs/Web/HTTP/CORS)
+* [Middlewares con Lumen.](https://lumen.laravel.com/docs/9.x/middleware)
 * [Middlewares con Laravel.](https://laravel.com/docs/9.x/middleware)
 * [Protección contra ataques CSRF con Laravel.](https://laravel.com/docs/9.x/csrf)
+* [PROTECCIÓN CSRF EN MI API REST.](https://youtu.be/N08q_zQlolo)
+* [Cómo hacer un Ataque CSRF.](https://youtu.be/CXSE89JGnek)
+* [Controladores con Lumen.](https://lumen.laravel.com/docs/9.x/controllers)
 * [Controladores con Laravel.](https://laravel.com/docs/9.x/controllers)
+* [Peticiones HTTP con Lumen.](https://lumen.laravel.com/docs/9.x/requests)
 * [Peticiones HTTP con Laravel.](https://laravel.com/docs/9.x/requests)
+* [Respuestas HTTP con Lumen.](https://lumen.laravel.com/docs/9.x/responses)
 * [Respuestas HTTP con Laravel.](https://laravel.com/docs/9.x/responses)
 * [Generador de URLs con Laravel.](https://laravel.com/docs/9.x/urls)
 * [Sesiones HTTP con Laravel.](https://laravel.com/docs/9.x/session)
@@ -73,7 +89,7 @@ CREATE DATABASE IF NOT EXISTS clima
 API de Oficialía Mayor - Una API RESTful de sistemas web para Oficialía Mayor.
 
 Copyright (C) 2022 - Ricardo García Jiménez <ricardogj08@riseup.net>,
-                     Oficialía Mayor de Celaya,Guanajuato,México <maria.ramirez@celaya.gob.mx>
+                     Oficialía Mayor Celaya,Guanajuato,México <maria.ramirez@celaya.gob.mx>
 
 Este programa es software libre: puedes redistribuirlo y/o modificarlo
 bajo los términos de la Licencia Pública General de GNU Affero publicada por

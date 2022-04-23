@@ -15,14 +15,14 @@ class OptionSeeder extends Seeder {
    */
   public function run() {
     DB::connection('clima')->table('options')->insert([
-      ['id' => 1, 'name' => 'Alto'],
-      ['id' => 2, 'name' => 'Medio Alto'],
-      ['id' => 3, 'name' => 'Medio Bajo'],
-      ['id' => 4, 'name' => 'Bajo'],
-      ['id' => 5, 'name' => 'Estrés Alto'],
-      ['id' => 6, 'name' => 'Estrés Medio'],
-      ['id' => 7, 'name' => 'Estrés Leve'],
-      ['id' => 8, 'name' => 'Sin estrés'],
+      ['id' => 1, 'body' => 'Alto'],
+      ['id' => 2, 'body' => 'Medio Alto'],
+      ['id' => 3, 'body' => 'Medio Bajo'],
+      ['id' => 4, 'body' => 'Bajo'],
+      ['id' => 5, 'body' => 'Estrés Alto'],
+      ['id' => 6, 'body' => 'Estrés Medio'],
+      ['id' => 7, 'body' => 'Estrés Leve'],
+      ['id' => 8, 'body' => 'Sin estrés'],
     ]);
   }
 }
