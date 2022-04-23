@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder {
     $this->call([
       HeadingSeeder::class,
       OptionSeeder::class,
+      FactorSeeder::class,
     ]);
   }
 }
