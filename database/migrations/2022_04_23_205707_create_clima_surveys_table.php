@@ -18,16 +18,6 @@ return new class extends Migration {
       $table->uuid('id')
             ->primary();
 
-      $table->unsignedTinyInteger('dependency_id');
-
-      $db = DB::connection('admin')->getDatabaseName();
-
-      $table->foreign('dependency_id')
-            ->references('id')
-            ->on($db.'.dependencies')
-            ->restrictOnUpdate()
-            ->restrictOnDelete();
-
       $table->unsignedTinyInteger('percentage_users');
 
       $table->unsignedBigInteger('started_at');

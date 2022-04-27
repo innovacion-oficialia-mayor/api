@@ -18,8 +18,7 @@ return new class extends Migration {
       $table->string('name', 255)
             ->unique();
 
-      $table->unsignedTinyInteger('dependency_type_id')
-            ->nullable();
+      $table->unsignedTinyInteger('dependency_type_id');
 
       $table->foreign('dependency_type_id')
             ->references('id')

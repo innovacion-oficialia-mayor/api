@@ -46,9 +46,5 @@ class DependencySeeder extends Seeder {
       ['id' => 29, 'dependency_type_id' => 2, 'name' => 'SIDEC'],
       ['id' => 30, 'dependency_type_id' => 2, 'name' => 'Instituto de Arte y Cultura de Celaya'],
     ]);
-
-    DB::table('dependencies')->insert([
-      ['id' => 31, 'name' => 'Todas'],
-    ]);
   }
 }
