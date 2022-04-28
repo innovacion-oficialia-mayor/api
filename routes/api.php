@@ -30,6 +30,12 @@ $router->group(['prefix' => '/v1/admin', 'namespace' => 'Admin', 'as' => 'admin'
     $router->get('/{id}', ['as' => 'show',  'uses' => 'GenderController@show']);
   });
 
+  $router->group(['prefix' => '/jobs/levels', 'as' => 'genders'],  function () use ($router) {
+    // Coincide con la URL "/v1/admin/jobs/levels" con el nombre de ruta "admin.jobs.levels.index".
+    $router->get('/',     ['as' => 'index', 'uses' => 'JobLevelController@index']);
+    $router->get('/{id}', ['as' => 'show',  'uses' => 'JobLevelController@show']);
+  });
+
   $router->group(['prefix' => '/jobs', 'as' => 'genders'],  function () use ($router) {
     // Coincide con la URL "/v1/admin/jobs" con el nombre de ruta "admin.jobs.index".
     $router->get('/',     ['as' => 'index', 'uses' => 'JobController@index']);
