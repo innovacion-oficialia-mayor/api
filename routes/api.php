@@ -50,6 +50,13 @@ $router->group(['prefix' => '/v1/admin', 'namespace' => 'Admin', 'as' => 'admin'
       });
     });
   });
+
+  $router->group(['prefix' => '/dependencies', 'as' => 'dependencies'],  function () use ($router) {
+    $router->group(['prefix' => '/types', 'as' => 'types'], function () use ($router) {
+      // Coincide con la URL "/v1/admin/dependencies/types/areas" con el nombre de ruta "admin.dependencies.types.areas".
+      $router->get('/areas', ['as' => 'areas', 'uses' => 'DependencyTypeController@areas']);
+    });
+  });
 });
 
 $router->group(['prefix' => '/v1/clima', 'namespace' => 'Clima', 'as' => 'clima'], function () use ($router) {
