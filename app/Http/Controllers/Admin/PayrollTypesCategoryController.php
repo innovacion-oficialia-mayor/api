@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Role;
+use App\Models\Admin\PayrollTypesCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
-class RoleController extends Controller {
+class PayrollTypesCategoryController extends Controller {
   /**
    * Create a new controller instance.
    *

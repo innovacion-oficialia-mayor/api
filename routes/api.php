@@ -41,6 +41,12 @@ $router->group(['prefix' => '/v1/admin', 'namespace' => 'Admin', 'as' => 'admin'
     $router->get('/',     ['as' => 'index', 'uses' => 'JobController@index']);
     $router->get('/{id}', ['as' => 'show',  'uses' => 'JobController@show']);
   });
+
+  $router->group(['prefix' => '/payrolls', 'as' => 'genders'],  function () use ($router) {
+    // Coincide con la URL "/v1/admin/payrolls" con el nombre de ruta "admin.payrolls.index".
+    $router->get('/',     ['as' => 'index', 'uses' => 'PayrollTypesCategoryController@index']);
+    $router->get('/{id}', ['as' => 'show',  'uses' => 'PayrollTypesCategoryController@show']);
+  });
 });
 
 $router->group(['prefix' => '/v1/clima', 'namespace' => 'Clima', 'as' => 'clima'], function () use ($router) {

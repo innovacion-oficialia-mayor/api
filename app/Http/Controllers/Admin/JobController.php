@@ -18,8 +18,15 @@ class JobController extends Controller {
     //
   }
 
-  public function index() {
-    //
+  public function index(Request $request) {
+    /**
+     * Valida los parámetros de consulta de la ruta.
+     */
+    $valQuery = Validator::make($request->query(), [
+      'sortBy' => ['bail', 'nullable', 'string', Rule::in(['asc', 'desc'])],
+    ]);
+
+    $query = $valQuery->validated();
   }
 
   public function show(Request $request, $id) {
@@ -30,14 +37,6 @@ class JobController extends Controller {
       'id' => 'bail|required|integer|min:1',
     ]);
 
-    /**
-     * Valida los parámetros de consulta de la ruta.
-     */
-    $valQuery = Validator::make($request->query(), [
-      'sortBy' => ['bail', 'nullable', 'string', Rule::in(['asc', 'desc'])],
-    ]);
-
     $input = $valParam->validated();
-    $query = $valQuery->validated();
   }
 }

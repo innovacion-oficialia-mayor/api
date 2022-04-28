@@ -9,6 +9,7 @@ use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
 use Illuminate\Http\Response;
+use Illuminate\Support\Arr;
 
 class Handler extends ExceptionHandler {
   /**
@@ -58,7 +59,7 @@ class Handler extends ExceptionHandler {
       $desc = [$exception->getMessage()];
     } elseif($exception instanceof ValidationException) {
       $code = $exception->status;
-      $desc = $exception->errors();
+      $desc = Arr::collapse($exception->errors());
     } else {
       $code = Response::HTTP_INTERNAL_SERVER_ERROR;
       $desc = [$exception->getMessage()];
