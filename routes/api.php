@@ -30,22 +30,25 @@ $router->group(['prefix' => '/v1/admin', 'namespace' => 'Admin', 'as' => 'admin'
     $router->get('/{id}', ['as' => 'show',  'uses' => 'GenderController@show']);
   });
 
-  $router->group(['prefix' => '/jobs/levels', 'as' => 'genders'],  function () use ($router) {
-    // Coincide con la URL "/v1/admin/jobs/levels" con el nombre de ruta "admin.jobs.levels.index".
-    $router->get('/',     ['as' => 'index', 'uses' => 'JobLevelController@index']);
-    $router->get('/{id}', ['as' => 'show',  'uses' => 'JobLevelController@show']);
-  });
-
-  $router->group(['prefix' => '/jobs', 'as' => 'genders'],  function () use ($router) {
+  $router->group(['prefix' => '/jobs', 'as' => 'jobs'],  function () use ($router) {
+    $router->group(['prefix' => '/levels', 'as' => 'levels'],  function () use ($router) {
+      // Coincide con la URL "/v1/admin/jobs/levels" con el nombre de ruta "admin.jobs.levels.index".
+      $router->get('/',     ['as' => 'index', 'uses' => 'JobLevelController@index']);
+      $router->get('/{id}', ['as' => 'show',  'uses' => 'JobLevelController@show']);
+    });
     // Coincide con la URL "/v1/admin/jobs" con el nombre de ruta "admin.jobs.index".
     $router->get('/',     ['as' => 'index', 'uses' => 'JobController@index']);
     $router->get('/{id}', ['as' => 'show',  'uses' => 'JobController@show']);
   });
 
-  $router->group(['prefix' => '/payrolls', 'as' => 'genders'],  function () use ($router) {
-    // Coincide con la URL "/v1/admin/payrolls" con el nombre de ruta "admin.payrolls.index".
-    $router->get('/',     ['as' => 'index', 'uses' => 'PayrollTypesCategoryController@index']);
-    $router->get('/{id}', ['as' => 'show',  'uses' => 'PayrollTypesCategoryController@show']);
+  $router->group(['prefix' => '/payrolls', 'as' => 'payrolls'],  function () use ($router) {
+    $router->group(['prefix' => '/types', 'as' => 'types'], function () use ($router) {
+     $router->group(['prefix' => '/categories', 'as' => 'categories'], function () use ($router) {
+      // Coincide con la URL "/v1/admin/payrolls/types/categories" con el nombre de ruta "admin.payrolls.types.categories.index".
+        $router->get('/',     ['as' => 'index', 'uses' => 'PayrollTypesCategoryController@index']);
+        $router->get('/{id}', ['as' => 'show',  'uses' => 'PayrollTypesCategoryController@show']);
+      });
+    });
   });
 });
 
