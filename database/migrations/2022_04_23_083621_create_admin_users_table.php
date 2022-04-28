@@ -73,9 +73,9 @@ return new class extends Migration {
 
       $table->string('name', 60);
 
-      $table->string('first_surname', 60);
+      $table->string('firstsurname', 60);
 
-      $table->string('second_surname', 60);
+      $table->string('secondsurname', 60);
 
       $table->string('phone', 10);
 
