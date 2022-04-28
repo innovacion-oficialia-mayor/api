@@ -19,9 +19,15 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => '/v1/admin', 'namespace' => 'Admin', 'as' => 'admin'], function () use ($router) {
   $router->group(['prefix' => '/roles', 'as' => 'roles'],  function () use ($router) {
-    // Coincide con la URL "/v1/admin/roles" y el nombre de ruta "admin.roles.index".
+    // Coincide con la URL "/v1/admin/roles" con el nombre de ruta "admin.roles.index".
     $router->get('/',     ['as' => 'index', 'uses' => 'RoleController@index']);
     $router->get('/{id}', ['as' => 'show',  'uses' => 'RoleController@show']);
+  });
+
+  $router->group(['prefix' => '/genders', 'as' => 'genders'],  function () use ($router) {
+    // Coincide con la URL "/v1/admin/genders" con el nombre de ruta "admin.genders.index".
+    $router->get('/',     ['as' => 'index', 'uses' => 'GenderController@index']);
+    $router->get('/{id}', ['as' => 'show',  'uses' => 'GenderController@show']);
   });
 });
 
