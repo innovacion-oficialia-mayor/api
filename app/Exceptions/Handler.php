@@ -8,6 +8,7 @@ use Illuminate\Validation\ValidationException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
+use Illuminate\Http\Response;
 
 class Handler extends ExceptionHandler {
   /**
@@ -46,6 +47,31 @@ class Handler extends ExceptionHandler {
    * @throws \Throwable
    */
   public function render($request, Throwable $exception) {
-    return parent::render($request, $exception);
+    if($exception instanceof AuthorizationException) {
+      $code = $exception->response()->code();
+      $desc = [$exception->response()->message()];
+    } elseif($exception instanceof HttpException) {
+      $code = $exception->getStatusCode();
+      $desc = [Response::$statusTexts[$code]];
+    } elseif($exception instanceof ModelNotFoundException) {
+      $code = Response::HTTP_NOT_FOUND;
+      $desc = [$exception->getMessage()];
+    } elseif($exception instanceof ValidationException) {
+      $code = $exception->status;
+      $desc = $exception->errors();
+    } else {
+      $code = Response::HTTP_INTERNAL_SERVER_ERROR;
+      $desc = [$exception->getMessage()];
+    }
+
+    //return parent::render($request, $exception);
+
+    return response()->json([
+      'data'    => [],
+      'message' => [
+        'type' => 'error',
+        'code' => $code,
+        'desc' => $desc,
+      ]], $code);
   }
 }
