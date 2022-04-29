@@ -4,7 +4,7 @@ namespace App\Http\Resources\Admin;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class RoleResource extends JsonResource {
+class GenderResource extends JsonResource {
   /**
    * Transform the resource into an array.
    *
@@ -15,8 +15,7 @@ class RoleResource extends JsonResource {
     return [
       'id'   => $this->id,
       'name' => $this->name,
-      'description' => $this->description,
-      'link' => route('admin.roles.show', ['id' => $this->id]),
+      'link' => route('admin.genders.show', ['id' => $this->id]),
     ];
   }
 }

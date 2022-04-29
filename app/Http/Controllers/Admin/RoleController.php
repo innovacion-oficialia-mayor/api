@@ -51,9 +51,9 @@ class RoleController extends Controller {
       'id' => 'bail|required|integer|min:1',
     ]);
 
-    $input = $valParam->validated();
+    $param = $valParam->validated();
 
-    return (new RoleResource(Role::findOrFail($id)))
+    return (new RoleResource(Role::findOrFail($param['id'])))
            ->additional([
             'message' => [
               'type' => 'success',
