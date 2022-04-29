@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\JobLevel;
+use App\Http\Resources\Admin\JobLevelResource;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Arr;
 
 class JobLevelController extends Controller {
   /**
@@ -27,6 +30,17 @@ class JobLevelController extends Controller {
     ]);
 
     $query = $valQuery->validated();
+
+    $sortBy = Arr::get($query, 'sortBy', 'asc');
+
+    return JobLevelResource::collection(JobLevel::all()->sortBy([['name', $sortBy]]))
+           ->additional([
+            'message' => [
+              'type' => 'success',
+              'code' => Response::HTTP_OK,
+              'description' => "",
+            ]
+    ]);
   }
 
   public function show(Request $request, $id) {
@@ -37,6 +51,15 @@ class JobLevelController extends Controller {
       'id' => 'bail|required|integer|min:1',
     ]);
 
-    $input = $valParam->validated();
+    $param = $valParam->validated();
+
+    return (new JobLevelResource(JobLevel::findOrFail($param['id'])))
+           ->additional([
+            'message' => [
+              'type' => 'success',
+              'code' => Response::HTTP_OK,
+              'description' => "",
+            ]
+    ]);
   }
 }
