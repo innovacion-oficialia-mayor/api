@@ -72,7 +72,7 @@ class Handler extends ExceptionHandler {
       'message' => [
         'type' => 'error',
         'code' => $code,
-        'desc' => $desc,
+        'description' => $desc,
       ]], $code);
   }
 }

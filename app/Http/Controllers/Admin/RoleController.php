@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Role;
+use App\Http\Resources\Admin\RoleResource;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Arr;
 
 class RoleController extends Controller {
   /**
@@ -27,6 +30,17 @@ class RoleController extends Controller {
     ]);
 
     $query = $valQuery->validated();
+
+    $sortBy = Arr::get($query, 'sortBy', 'asc');
+
+    return RoleResource::collection(Role::all()->sortBy([['name', $sortBy]]))
+           ->additional([
+            'message' => [
+              'type' => 'success',
+              'code' => Response::HTTP_OK,
+              'description' => "",
+            ]
+    ]);
   }
 
   public function show(Request $request, $id) {
@@ -38,5 +52,14 @@ class RoleController extends Controller {
     ]);
 
     $input = $valParam->validated();
+
+    return (new RoleResource(Role::findOrFail($id)))
+           ->additional([
+            'message' => [
+              'type' => 'success',
+              'code' => Response::HTTP_OK,
+              'description' => "",
+            ]
+    ]);
   }
 }

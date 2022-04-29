@@ -18,7 +18,7 @@ return new class extends Migration {
       $table->string('name', 20)
             ->unique();
 
-      $table->string('desc', 255);
+      $table->string('description', 255);
     });
   }
 
