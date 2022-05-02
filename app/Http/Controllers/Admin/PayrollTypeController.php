@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Role;
-use App\Http\Resources\Admin\RoleResource;
+use App\Models\Admin\PayrollType;
+use App\Http\Resources\Admin\PayrollTypeResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Arr;
 
-class RoleController extends Controller {
+class PayrollTypeController extends Controller {
   /**
    * Create a new controller instance.
    *
@@ -33,7 +33,7 @@ class RoleController extends Controller {
 
     $sortBy = Arr::get($query, 'sortBy', 'asc');
 
-    return RoleResource::collection(Role::all()
+    return PayrollTypeResource::collection(PayrollType::all()
            ->sortBy([['name', $sortBy]]))
            ->additional([
             'message' => [
@@ -54,7 +54,7 @@ class RoleController extends Controller {
 
     $param = $valParam->validated();
 
-    return (new RoleResource(Role::findOrFail($param['id'])))
+    return (new PayrollTypeResource(PayrollType::findOrFail($param['id'])))
            ->additional([
             'message' => [
               'type' => 'success',

@@ -41,6 +41,22 @@ $router->group(['prefix' => '/v1/admin', 'namespace' => 'Admin', 'as' => 'admin'
     $router->get('/',     ['as' => 'index', 'uses' => 'JobController@index']);
     $router->get('/{id}', ['as' => 'show',  'uses' => 'JobController@show']);
   });
+
+  $router->group(['prefix' => '/payrolls', 'as' => 'payrolls'],  function () use ($router) {
+    $router->group(['prefix' => '/types', 'as' => 'types'], function () use ($router) {
+      $router->group(['prefix' => '/categories', 'as' => 'categories'], function () use ($router) {
+      });
+      // Coincide con la URL "/v1/admin/payrolls/types" con el nombre de ruta "admin.payrolls.types.index".
+      $router->get('/',     ['as' => 'index', 'uses' => 'PayrollTypeController@index']);
+      $router->get('/{id}', ['as' => 'show',  'uses' => 'PayrollTypeController@show']);
+    });
+
+    $router->group(['prefix' => '/categories', 'as' => 'categories'], function () use ($router) {
+      // Coincide con la URL "/v1/admin/payrolls/categories" con el nombre de ruta "admin.payrolls.categories.index".
+      $router->get('/',     ['as' => 'index', 'uses' => 'PayrollCategoryController@index']);
+      $router->get('/{id}', ['as' => 'show',  'uses' => 'PayrollCategoryController@show']);
+    });
+  });
 });
 
 $router->group(['prefix' => '/v1/clima', 'namespace' => 'Clima', 'as' => 'clima'], function () use ($router) {

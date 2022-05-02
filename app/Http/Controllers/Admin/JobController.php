@@ -33,7 +33,8 @@ class JobController extends Controller {
 
     $sortBy = Arr::get($query, 'sortBy', 'asc');
 
-    return JobResource::collection(Job::all()->sortBy([['name', $sortBy]]))
+    return JobResource::collection(Job::all()
+           ->sortBy([['name', $sortBy]]))
            ->additional([
             'message' => [
               'type' => 'success',

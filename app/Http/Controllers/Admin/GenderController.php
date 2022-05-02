@@ -33,7 +33,8 @@ class GenderController extends Controller {
 
     $sortBy = Arr::get($query, 'sortBy', 'asc');
 
-    return GenderResource::collection(Gender::all()->sortBy([['name', $sortBy]]))
+    return GenderResource::collection(Gender::all()
+           ->sortBy([['name', $sortBy]]))
            ->additional([
             'message' => [
               'type' => 'success',

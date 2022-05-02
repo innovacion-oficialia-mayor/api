@@ -82,6 +82,7 @@ CREATE DATABASE IF NOT EXISTS clima
 * [Cifrado de contraseñas con Laravel.](https://laravel.com/docs/9.x/hashing)
 * [Bases de datos con Laravel.](https://laravel.com/docs/9.x/database)
 * [Eloquent ORM con Laravel.](https://laravel.com/docs/9.x/eloquent)
+* [Relación muchos a muchos para tablas pivote.](https://youtu.be/07HRysMPaKY)
 
 ## Licencia
 
