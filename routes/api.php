@@ -44,8 +44,6 @@ $router->group(['prefix' => '/v1/admin', 'namespace' => 'Admin', 'as' => 'admin'
 
   $router->group(['prefix' => '/payrolls', 'as' => 'payrolls'],  function () use ($router) {
     $router->group(['prefix' => '/types', 'as' => 'types'], function () use ($router) {
-      $router->group(['prefix' => '/categories', 'as' => 'categories'], function () use ($router) {
-      });
       // Coincide con la URL "/v1/admin/payrolls/types" con el nombre de ruta "admin.payrolls.types.index".
       $router->get('/',     ['as' => 'index', 'uses' => 'PayrollTypeController@index']);
       $router->get('/{id}', ['as' => 'show',  'uses' => 'PayrollTypeController@show']);
@@ -56,6 +54,20 @@ $router->group(['prefix' => '/v1/admin', 'namespace' => 'Admin', 'as' => 'admin'
       $router->get('/',     ['as' => 'index', 'uses' => 'PayrollCategoryController@index']);
       $router->get('/{id}', ['as' => 'show',  'uses' => 'PayrollCategoryController@show']);
     });
+  });
+
+  $router->group(['prefix' => '/dependencies', 'as' => 'dependencies'],  function () use ($router) {
+    $router->group(['prefix' => '/types', 'as' => 'types'], function () use ($router) {
+      // Coincide con la URL "/v1/admin/dependencies/types" con el nombre de ruta "admin.dependencies.types.index".
+      $router->get('/',     ['as' => 'index', 'uses' => 'DependencyTypeController@index']);
+      $router->get('/{id}', ['as' => 'show',  'uses' => 'DependencyTypeController@show']);
+    });
+  });
+
+  $router->group(['prefix' => '/areas', 'as' => 'areas'], function () use ($router) {
+    // Coincide con la URL "/v1/admin/areas" con el nombre de ruta "admin.areas.index".
+    $router->get('/',     ['as' => 'index', 'uses' => 'AreaController@index']);
+    $router->get('/{id}', ['as' => 'show',  'uses' => 'AreaController@show']);
   });
 });
 
