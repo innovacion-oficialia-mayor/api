@@ -17,6 +17,9 @@ $router->get('/', function () use ($router) {
   return $router->app->version();
 });
 
+/**
+ * Administración y consulta de empleados y dependencias.
+ */
 $router->group(['prefix' => '/v1/admin', 'namespace' => 'Admin', 'as' => 'admin'], function () use ($router) {
   $router->group(['prefix' => '/roles', 'as' => 'roles'],  function () use ($router) {
     // Coincide con la URL "/v1/admin/roles" con el nombre de ruta "admin.roles.index".
@@ -71,6 +74,13 @@ $router->group(['prefix' => '/v1/admin', 'namespace' => 'Admin', 'as' => 'admin'
   });
 });
 
+/**
+ * Clima Laboral y Cultura Organizacional.
+ */
 $router->group(['prefix' => '/v1/clima', 'namespace' => 'Clima', 'as' => 'clima'], function () use ($router) {
-  //
+  $router->group(['prefix' => '/headings', 'as' => 'headings'], function () use ($router) {
+    // Coincide con la URL "/v1/clima/headings" con el nombre de ruta "clima.headings.index".
+    $router->get('/',     ['as' => 'index', 'uses' => 'HeadingController@index']);
+    $router->get('/{id}', ['as' => 'show',  'uses' => 'HeadingController@show']);
+  });
 });
