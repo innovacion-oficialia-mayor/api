@@ -83,4 +83,10 @@ $router->group(['prefix' => '/v1/clima', 'namespace' => 'Clima', 'as' => 'clima'
     $router->get('/',     ['as' => 'index', 'uses' => 'HeadingController@index']);
     $router->get('/{id}', ['as' => 'show',  'uses' => 'HeadingController@show']);
   });
+
+  $router->group(['prefix' => '/options', 'as' => 'options'], function () use ($router) {
+    // Coincide con la URL "/v1/clima/options" con el nombre de ruta "clima.options.index".
+    $router->get('/',     ['as' => 'index', 'uses' => 'OptionController@index']);
+    $router->get('/{id}', ['as' => 'show',  'uses' => 'OptionController@show']);
+  });
 });
