@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Admin;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\Admin\DependencyResource;
 
 class AreaResource extends JsonResource {
   /**
@@ -13,9 +14,12 @@ class AreaResource extends JsonResource {
    */
   public function toArray($request) {
     return [
-      'id'   => $this->id,
+      'id'    => $this->id,
+      'pivot' => $this->whenPivotLoaded('dependency_areas', function () {
+        return $this->pivot->id;
+      }),
       'name' => $this->name,
-      'link' => route('admin.areas.show', ['id' => $this->id]),
+      'dependencies' => DependencyResource::collection($this->whenLoaded('dependencies')),
     ];
   }
 }

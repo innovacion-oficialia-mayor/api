@@ -15,7 +15,6 @@ class JobLevelResource extends JsonResource {
     return [
       'id'   => $this->id,
       'name' => $this->name,
-      'link' => route('admin.jobs.levels.show', ['id' => $this->id]),
     ];
   }
 }

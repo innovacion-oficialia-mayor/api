@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Area;
-use App\Http\Resources\Admin\AreaResource;
+use App\Models\Admin\Dependency;
+use App\Http\Resources\Admin\DependencyResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Arr;
 
-class AreaController extends Controller {
+class DependencyController extends Controller {
   /**
    * Create a new controller instance.
    *
@@ -33,8 +33,8 @@ class AreaController extends Controller {
 
     $sortBy = Arr::get($query, 'sortBy', 'asc');
 
-    return AreaResource::collection(Area::with([
-           'dependencies' => function($query) use ($sortBy) {
+    return DependencyResource::collection(Dependency::with([
+           'areas' => function($query) use ($sortBy) {
              $query->orderBy('name', $sortBy);
            }])
            ->orderBy('name', $sortBy)

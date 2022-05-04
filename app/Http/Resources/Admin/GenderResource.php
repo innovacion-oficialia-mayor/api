@@ -15,7 +15,6 @@ class GenderResource extends JsonResource {
     return [
       'id'   => $this->id,
       'name' => $this->name,
-      'link' => route('admin.genders.show', ['id' => $this->id]),
     ];
   }
 }

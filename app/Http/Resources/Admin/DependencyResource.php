@@ -3,9 +3,9 @@
 namespace App\Http\Resources\Admin;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\Admin\PayrollTypeResource;
+use App\Http\Resources\Admin\AreaResource;
 
-class PayrollCategoryResource extends JsonResource {
+class DependencyResource extends JsonResource {
   /**
    * Transform the resource into an array.
    *
@@ -15,11 +15,11 @@ class PayrollCategoryResource extends JsonResource {
   public function toArray($request) {
     return [
       'id'    => $this->id,
-      'pivot' => $this->whenPivotLoaded('payroll_types_categories', function () {
+      'pivot' => $this->whenPivotLoaded('dependency_areas', function () {
         return $this->pivot->id;
       }),
       'name'  => $this->name,
-      'types' => PayrollTypeResource::collection($this->whenLoaded('types')),
+      'areas' => AreaResource::collection($this->whenLoaded('areas')),
     ];
   }
 }

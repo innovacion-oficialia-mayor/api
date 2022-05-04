@@ -33,34 +33,18 @@ class PayrollTypeController extends Controller {
 
     $sortBy = Arr::get($query, 'sortBy', 'asc');
 
-    return PayrollTypeResource::collection(PayrollType::all()
-           ->sortBy([['name', $sortBy]]))
+    return PayrollTypeResource::collection(PayrollType::with([
+           'categories' => function($query) use ($sortBy) {
+             $query->orderBy('name', $sortBy);
+           }])
+           ->orderBy('name', $sortBy)
+           ->get())
            ->additional([
-            'message' => [
-              'type' => 'success',
-              'code' => Response::HTTP_OK,
-              'description' => "",
-            ]
-    ]);
-  }
-
-  public function show(Request $request, $id) {
-    /**
-     * Valida los parámetros de la ruta.
-     */
-    $valParam = Validator::make(['id' => $id], [
-      'id' => 'bail|required|integer|min:1',
-    ]);
-
-    $param = $valParam->validated();
-
-    return (new PayrollTypeResource(PayrollType::findOrFail($param['id'])))
-           ->additional([
-            'message' => [
-              'type' => 'success',
-              'code' => Response::HTTP_OK,
-              'description' => "",
-            ]
+             'message' => [
+               'type' => 'success',
+               'code' => Response::HTTP_OK,
+               'description' => "",
+             ]
     ]);
   }
 }

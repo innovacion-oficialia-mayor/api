@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Admin;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\Admin\PayrollCategoryResource;
 
 class PayrollTypeResource extends JsonResource {
   /**
@@ -13,9 +14,12 @@ class PayrollTypeResource extends JsonResource {
    */
   public function toArray($request) {
     return [
-      'id'   => $this->id,
+      'id'    => $this->id,
+      'pivot' => $this->whenPivotLoaded('payroll_types_categories', function () {
+        return $this->pivot->id;
+      }),
       'name' => $this->name,
-      'link' => route('admin.payrolls.types.show', ['id' => $this->id]),
+      'categories' => PayrollCategoryResource::collection($this->whenLoaded('categories')),
     ];
   }
 }

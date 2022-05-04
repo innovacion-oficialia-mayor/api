@@ -21,72 +21,64 @@ $router->get('/', function () use ($router) {
  * Administración y consulta de empleados y dependencias.
  */
 $router->group(['prefix' => '/v1/admin', 'namespace' => 'Admin', 'as' => 'admin'], function () use ($router) {
-  $router->group(['prefix' => '/roles', 'as' => 'roles'],  function () use ($router) {
-    // Coincide con la URL "/v1/admin/roles" con el nombre de ruta "admin.roles.index".
-    $router->get('/',     ['as' => 'index', 'uses' => 'RoleController@index']);
-    $router->get('/{id}', ['as' => 'show',  'uses' => 'RoleController@show']);
+  $router->group(['prefix' => '/roles', 'as' => 'roles'], function () use ($router) {
+    /**
+     * Coincide con la ruta /v1/admin/roles y el nombre 'admin.roles.index'.
+     */
+    $router->get('/', ['as' => 'index', 'uses' => 'RoleController@index']);
   });
 
-  $router->group(['prefix' => '/genders', 'as' => 'genders'],  function () use ($router) {
-    // Coincide con la URL "/v1/admin/genders" con el nombre de ruta "admin.genders.index".
-    $router->get('/',     ['as' => 'index', 'uses' => 'GenderController@index']);
-    $router->get('/{id}', ['as' => 'show',  'uses' => 'GenderController@show']);
+  $router->group(['prefix' => '/genders', 'as' => 'genders'], function () use ($router) {
+    /**
+     * Coincide con la ruta /v1/admin/genders y el nombre 'admin.genders.index'.
+     */
+    $router->get('/', ['as' => 'index', 'uses' => 'GenderController@index']);
   });
 
-  $router->group(['prefix' => '/jobs', 'as' => 'jobs'],  function () use ($router) {
-    $router->group(['prefix' => '/levels', 'as' => 'levels'],  function () use ($router) {
-      // Coincide con la URL "/v1/admin/jobs/levels" con el nombre de ruta "admin.jobs.levels.index".
-      $router->get('/',     ['as' => 'index', 'uses' => 'JobLevelController@index']);
-      $router->get('/{id}', ['as' => 'show',  'uses' => 'JobLevelController@show']);
+  $router->group(['prefix' => '/jobs', 'as' => 'jobs'], function () use ($router) {
+    $router->group(['prefix' => '/levels', 'as' => 'levels'], function () use ($router) {
+      /**
+       * Coincide con la ruta /v1/admin/jobs/levels y el nombre 'admin.jobs.levels.index'.
+       */
+      $router->get('/', ['as' => 'index', 'uses' => 'JobLevelController@index']);
     });
-
-    // Coincide con la URL "/v1/admin/jobs" con el nombre de ruta "admin.jobs.index".
-    $router->get('/',     ['as' => 'index', 'uses' => 'JobController@index']);
-    $router->get('/{id}', ['as' => 'show',  'uses' => 'JobController@show']);
+    /**
+     * Coincide con la ruta /v1/admin/jobs y el nombre 'admin.jobs.index'.
+     */
+    $router->get('/', ['as' => 'index', 'uses' => 'JobController@index']);
   });
 
-  $router->group(['prefix' => '/payrolls', 'as' => 'payrolls'],  function () use ($router) {
+  $router->group(['prefix' => '/payrolls', 'as' => 'payrolls'], function () use ($router) {
     $router->group(['prefix' => '/types', 'as' => 'types'], function () use ($router) {
-      // Coincide con la URL "/v1/admin/payrolls/types" con el nombre de ruta "admin.payrolls.types.index".
-      $router->get('/',     ['as' => 'index', 'uses' => 'PayrollTypeController@index']);
-      $router->get('/{id}', ['as' => 'show',  'uses' => 'PayrollTypeController@show']);
+      /**
+       * Coincide con la ruta /v1/admin/payrolls/types y el nombre 'admin.payrolls.types.index'.
+       */
+      $router->get('/', ['as' => 'index', 'uses' => 'PayrollTypeController@index']);
     });
-
     $router->group(['prefix' => '/categories', 'as' => 'categories'], function () use ($router) {
-      // Coincide con la URL "/v1/admin/payrolls/categories" con el nombre de ruta "admin.payrolls.categories.index".
-      $router->get('/',     ['as' => 'index', 'uses' => 'PayrollCategoryController@index']);
-      $router->get('/{id}', ['as' => 'show',  'uses' => 'PayrollCategoryController@show']);
+      /**
+       * Coincide con la ruta /v1/admin/payrolls/categories y el nombre 'admin.payrolls.categories.index'.
+       */
+      $router->get('/', ['as' => 'index', 'uses' => 'PayrollCategoryController@index']);
     });
   });
 
-  $router->group(['prefix' => '/dependencies', 'as' => 'dependencies'],  function () use ($router) {
+  $router->group(['prefix' => '/dependencies', 'as' => 'dependencies'], function () use ($router) {
+    $router->group(['prefix' => '/areas', 'as' => 'areas'], function () use ($router) {
+      /**
+       * Coincide con la ruta /v1/admin/dependencies/areas y el nombre 'admin.dependencies.areas.index'.
+       */
+      $router->get('/', ['as' => 'index', 'uses' => 'AreaController@index']);
+    });
+    /**
+     * Coincide con la ruta /v1/admin/dependencies/types y el nombre 'admin.dependencies.types.index'.
+     */
     $router->group(['prefix' => '/types', 'as' => 'types'], function () use ($router) {
-      // Coincide con la URL "/v1/admin/dependencies/types" con el nombre de ruta "admin.dependencies.types.index".
-      $router->get('/',     ['as' => 'index', 'uses' => 'DependencyTypeController@index']);
-      $router->get('/{id}', ['as' => 'show',  'uses' => 'DependencyTypeController@show']);
+      $router->get('/', ['as' => 'index', 'uses' => 'DependencyTypeController@index']);
     });
-  });
-
-  $router->group(['prefix' => '/areas', 'as' => 'areas'], function () use ($router) {
-    // Coincide con la URL "/v1/admin/areas" con el nombre de ruta "admin.areas.index".
-    $router->get('/',     ['as' => 'index', 'uses' => 'AreaController@index']);
-    $router->get('/{id}', ['as' => 'show',  'uses' => 'AreaController@show']);
-  });
-});
-
-/**
- * Clima Laboral y Cultura Organizacional.
- */
-$router->group(['prefix' => '/v1/clima', 'namespace' => 'Clima', 'as' => 'clima'], function () use ($router) {
-  $router->group(['prefix' => '/headings', 'as' => 'headings'], function () use ($router) {
-    // Coincide con la URL "/v1/clima/headings" con el nombre de ruta "clima.headings.index".
-    $router->get('/',     ['as' => 'index', 'uses' => 'HeadingController@index']);
-    $router->get('/{id}', ['as' => 'show',  'uses' => 'HeadingController@show']);
-  });
-
-  $router->group(['prefix' => '/options', 'as' => 'options'], function () use ($router) {
-    // Coincide con la URL "/v1/clima/options" con el nombre de ruta "clima.options.index".
-    $router->get('/',     ['as' => 'index', 'uses' => 'OptionController@index']);
-    $router->get('/{id}', ['as' => 'show',  'uses' => 'OptionController@show']);
+    /**
+     * Coincide con la ruta /v1/admin/dependencies y el nombre 'admin.dependencies.index'.
+     */
+    $router->get('/', ['as' => 'index', 'uses' => 'DependencyController@index']);
   });
 });

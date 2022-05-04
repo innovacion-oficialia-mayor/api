@@ -33,34 +33,14 @@ class RoleController extends Controller {
 
     $sortBy = Arr::get($query, 'sortBy', 'asc');
 
-    return RoleResource::collection(Role::all()
-           ->sortBy([['name', $sortBy]]))
+    return RoleResource::collection(Role::orderBy('name', $sortBy)
+           ->get())
            ->additional([
-            'message' => [
-              'type' => 'success',
-              'code' => Response::HTTP_OK,
-              'description' => "",
-            ]
-    ]);
-  }
-
-  public function show(Request $request, $id) {
-    /**
-     * Valida los parámetros de la ruta.
-     */
-    $valParam = Validator::make(['id' => $id], [
-      'id' => 'bail|required|integer|min:1',
-    ]);
-
-    $param = $valParam->validated();
-
-    return (new RoleResource(Role::findOrFail($param['id'])))
-           ->additional([
-            'message' => [
-              'type' => 'success',
-              'code' => Response::HTTP_OK,
-              'description' => "",
-            ]
+             'message' => [
+               'type' => 'success',
+               'code' => Response::HTTP_OK,
+               'description' => "",
+             ],
     ]);
   }
 }
