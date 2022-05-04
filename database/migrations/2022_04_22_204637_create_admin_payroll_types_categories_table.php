@@ -17,8 +17,7 @@ return new class extends Migration {
 
       $table->unsignedTinyInteger('payroll_type_id');
 
-      $table->unsignedTinyInteger('payroll_category_id')
-            ->nullable();
+      $table->unsignedTinyInteger('payroll_category_id');
 
       $table->unique(['payroll_type_id', 'payroll_category_id'], 'payroll_types_categories_unique');
 

@@ -17,6 +17,7 @@ class PayrollCategorySeeder extends Seeder {
     DB::table('payroll_categories')->insert([
       ['id' => 1, 'name' => 'Base'],
       ['id' => 2, 'name' => 'Base/Sindicalizado'],
+      ['id' => 3, 'name' => 'No aplica'],
     ]);
   }
 }

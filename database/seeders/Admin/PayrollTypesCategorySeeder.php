@@ -17,10 +17,7 @@ class PayrollTypesCategorySeeder extends Seeder {
     DB::table('payroll_types_categories')->insert([
       ['id' => 1, 'payroll_type_id' => 1, 'payroll_category_id' => 1],
       ['id' => 2, 'payroll_type_id' => 1, 'payroll_category_id' => 2],
-    ]);
-
-    DB::table('payroll_types_categories')->insert([
-      ['id' => 3, 'payroll_type_id' => 2],
+      ['id' => 3, 'payroll_type_id' => 2, 'payroll_category_id' => 3],
     ]);
   }
 }

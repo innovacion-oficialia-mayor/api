@@ -17,8 +17,7 @@ return new class extends Migration {
 
       $table->unsignedTinyInteger('dependency_id');
 
-      $table->unsignedTinyInteger('area_id')
-            ->nullable();
+      $table->unsignedTinyInteger('area_id');
 
       $table->unique(['dependency_id', 'area_id']);
 
