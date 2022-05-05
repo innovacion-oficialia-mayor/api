@@ -34,17 +34,16 @@ class PayrollTypeController extends Controller {
     $sortBy = Arr::get($query, 'sortBy', 'asc');
 
     return PayrollTypeResource::collection(PayrollType::with([
-           'categories' => function($query) use ($sortBy) {
-             $query->orderBy('name', $sortBy);
-           }])
-           ->orderBy('name', $sortBy)
-           ->get())
-           ->additional([
-             'message' => [
-               'type' => 'success',
-               'code' => Response::HTTP_OK,
-               'description' => "",
-             ]
-    ]);
+      'categories' => function($query) use ($sortBy) {
+        $query->orderBy('name', $sortBy);
+      }])
+      ->orderBy('name', $sortBy)
+      ->get())
+      ->additional([
+        'message' => [
+          'type' => 'success',
+          'code' => Response::HTTP_OK,
+          'description' => "",
+      ]]);
   }
 }

@@ -73,6 +73,6 @@ class Handler extends ExceptionHandler {
         'type' => 'error',
         'code' => $code,
         'description' => $desc,
-      ]], $code);
+    ]], $code);
   }
 }

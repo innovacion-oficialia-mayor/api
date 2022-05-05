@@ -34,17 +34,16 @@ class AreaController extends Controller {
     $sortBy = Arr::get($query, 'sortBy', 'asc');
 
     return AreaResource::collection(Area::with(['dependencies.type',
-           'dependencies' => function($query) use ($sortBy) {
-             $query->orderBy('name', $sortBy);
-           }])
-           ->orderBy('name', $sortBy)
-           ->get())
-           ->additional([
-             'message' => [
-               'type' => 'success',
-               'code' => Response::HTTP_OK,
-               'description' => "",
-             ]
-    ]);
+    'dependencies' => function($query) use ($sortBy) {
+      $query->orderBy('name', $sortBy);
+    }])
+    ->orderBy('name', $sortBy)
+    ->get())
+    ->additional([
+      'message' => [
+        'type' => 'success',
+        'code' => Response::HTTP_OK,
+        'description' => "",
+    ]]);
   }
 }

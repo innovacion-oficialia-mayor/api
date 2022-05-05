@@ -34,13 +34,12 @@ class RoleController extends Controller {
     $sortBy = Arr::get($query, 'sortBy', 'asc');
 
     return RoleResource::collection(Role::orderBy('name', $sortBy)
-           ->get())
-           ->additional([
-             'message' => [
-               'type' => 'success',
-               'code' => Response::HTTP_OK,
-               'description' => "",
-             ],
-    ]);
+    ->get())
+    ->additional([
+      'message' => [
+        'type' => 'success',
+        'code' => Response::HTTP_OK,
+        'description' => "",
+    ]]);
   }
 }

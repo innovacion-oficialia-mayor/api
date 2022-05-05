@@ -34,17 +34,16 @@ class DependencyController extends Controller {
     $sortBy = Arr::get($query, 'sortBy', 'asc');
 
     return DependencyResource::collection(Dependency::with(['type',
-           'areas' => function($query) use ($sortBy) {
-             $query->orderBy('name', $sortBy);
-           }])
-           ->orderBy('name', $sortBy)
-           ->get())
-           ->additional([
-             'message' => [
-               'type' => 'success',
-               'code' => Response::HTTP_OK,
-               'description' => "",
-             ]
-    ]);
+    'areas' => function($query) use ($sortBy) {
+      $query->orderBy('name', $sortBy);
+    }])
+    ->orderBy('name', $sortBy)
+    ->get())
+    ->additional([
+      'message' => [
+        'type' => 'success',
+        'code' => Response::HTTP_OK,
+        'description' => "",
+    ]]);
   }
 }
