@@ -81,4 +81,14 @@ $router->group(['prefix' => '/v1/admin', 'namespace' => 'Admin', 'as' => 'admin'
      */
     $router->get('/', ['as' => 'index', 'uses' => 'DependencyController@index']);
   });
+
+  $router->group(['prefix' => '/users', 'as' => 'users'], function () use ($router) {
+    /**
+     * Coincide con la ruta /v1/admin/users y el nombre 'admin.users.index'.
+     */
+    $router->get('/',     ['as' => 'index',  'uses' => 'UserController@index']);
+    $router->get('/{id}', ['as' => 'show',   'uses' => 'UserController@show']);
+    $router->post('/',    ['as' => 'store',  'uses' => 'UserController@store']);
+    $router->put('/{id}', ['as' => 'update', 'uses' => 'UserController@update']);
+  });
 });

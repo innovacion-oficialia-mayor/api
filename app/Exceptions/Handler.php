@@ -59,7 +59,7 @@ class Handler extends ExceptionHandler {
       $desc = [$exception->getMessage()];
     } elseif($exception instanceof ValidationException) {
       $code = $exception->status;
-      $desc = Arr::collapse($exception->errors());
+      $desc = Arr::flatten($exception->errors());
     } else {
       $code = Response::HTTP_INTERNAL_SERVER_ERROR;
       $desc = [$exception->getMessage()];
