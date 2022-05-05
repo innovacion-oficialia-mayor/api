@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Admin;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\Admin\DependencyResource;
 
 class DependencyTypeResource extends JsonResource {
   /**
@@ -15,6 +16,7 @@ class DependencyTypeResource extends JsonResource {
     return [
       'id'   => $this->id,
       'name' => $this->name,
+      'dependencies' => DependencyResource::collection($this->whenLoaded('dependencies')),
     ];
   }
 }

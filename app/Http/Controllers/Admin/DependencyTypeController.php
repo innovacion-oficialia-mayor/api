@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin\PayrollType;
-use App\Http\Resources\Admin\PayrollTypeResource;
+use App\Models\Admin\DependencyType;
+use App\Http\Resources\Admin\DependencyTypeResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Arr;
 
-class PayrollTypeController extends Controller {
+class DependencyTypeController extends Controller {
   /**
    * Create a new controller instance.
    *
@@ -33,8 +33,11 @@ class PayrollTypeController extends Controller {
 
     $sortBy = Arr::get($query, 'sortBy', 'asc');
 
-    return PayrollTypeResource::collection(PayrollType::with([
-    'categories' => function($query) use ($sortBy) {
+    return DependencyTypeResource::collection(DependencyType::with([
+    'dependencies' => function($query) use ($sortBy) {
+      $query->orderBy('name', $sortBy);
+    },
+    'dependencies.areas' => function($query) use ($sortBy) {
       $query->orderBy('name', $sortBy);
     }])
     ->orderBy('name', $sortBy)
