@@ -33,7 +33,7 @@ class DependencyController extends Controller {
 
     $sortBy = Arr::get($query, 'sortBy', 'asc');
 
-    return DependencyResource::collection(Dependency::with([
+    return DependencyResource::collection(Dependency::with(['type',
            'areas' => function($query) use ($sortBy) {
              $query->orderBy('name', $sortBy);
            }])

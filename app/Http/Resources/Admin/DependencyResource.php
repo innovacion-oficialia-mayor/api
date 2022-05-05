@@ -4,6 +4,7 @@ namespace App\Http\Resources\Admin;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\Admin\AreaResource;
+use App\Http\Resources\Admin\DependencyTypeResource;
 
 class DependencyResource extends JsonResource {
   /**
@@ -19,6 +20,7 @@ class DependencyResource extends JsonResource {
         return $this->pivot->id;
       }),
       'name'  => $this->name,
+      'type'  => new DependencyTypeResource($this->whenLoaded('type')),
       'areas' => AreaResource::collection($this->whenLoaded('areas')),
     ];
   }
