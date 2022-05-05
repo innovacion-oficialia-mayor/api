@@ -27,17 +27,18 @@ class UserController extends Controller {
     $input = $this->validate($request, [
       'payroll' => 'bail|required|string|min:5|max:10|unique:App\Models\Admin\User',
       'email'   => 'bail|nullable|string|max:255|email|unique:App\Models\Admin\User',
-      'role_id' => 'bail|required|integer|min:1|exist:App\Models\Admin\Job,id',
-      'gender_id' => 'bail|required|integer|min:1|exist:App\Models\Admin\Gender,id',
-      'job_id' => 'bail|required|integer|min:1|exist:App\Models\Admin\Job,id',
-      'job_level_id' => 'bail|required|integer|min:1|exist:App\Models\Admin\JobLevel,id',
-      'payroll_type_category_pivot' => 'bail|required|integer|min:1|exist:App\Models\Admin\PayrollTypeCategory,id',
-      'dependency_area_pivot' => 'bail|required|integer|min:1|exist:App\Models\Admin\DependencyArea,id',
+      'role_id' => 'bail|required|integer|min:1|exists:App\Models\Admin\Role,id',
+      'gender_id' => 'bail|required|integer|min:1|exists:App\Models\Admin\Gender,id',
+      'job_id' => 'bail|required|integer|min:1|exists:App\Models\Admin\Job,id',
+      'job_level_id' => 'bail|required|integer|min:1|exists:App\Models\Admin\JobLevel,id',
+      'payroll_type_category_id' => 'bail|required|integer|min:1|exists:App\Models\Admin\PayrollTypesCategory,id',
+      'dependency_area_id' => 'bail|required|integer|min:1|exists:App\Models\Admin\DependencyArea,id',
       'name' => 'bail|required|string|min:1|max:60',
       'firstsurname'  => 'bail|required|min:1|max:60',
       'secondsurname' => 'bail|required|min:1|max:60',
       'phone'  => 'bail|required|min:10|max:10',
-      'active' => 'bail|required|boolean',
+      'active' => 'bail|nullable|boolean',
+      'entered_at' => 'bail|required|date_format:Y/m/d',
     ]);
 
     $input['id'] = Str::uuid();

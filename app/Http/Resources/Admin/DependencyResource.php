@@ -16,7 +16,7 @@ class DependencyResource extends JsonResource {
   public function toArray($request) {
     return [
       'id'    => $this->id,
-      'pivot' => $this->whenPivotLoaded('dependency_areas', function () {
+      'dependency_area_id' => $this->whenPivotLoaded('dependency_areas', function () {
         return $this->pivot->id;
       }),
       'name'  => $this->name,

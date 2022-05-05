@@ -12,6 +12,6 @@ class User extends Model {
     'gender_id', 'job_id', 'job_level_id',
     'payroll_type_category_id', 'dependency_area_id',
     'name', 'firstsurname', 'secondsurname', 'phone',
-    'password', 'active',
+    'password', 'active', 'entered_at',
   ];
 }

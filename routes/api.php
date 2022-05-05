@@ -64,22 +64,23 @@ $router->group(['prefix' => '/v1/admin', 'namespace' => 'Admin', 'as' => 'admin'
   });
 
   $router->group(['prefix' => '/dependencies', 'as' => 'dependencies'], function () use ($router) {
-    $router->group(['prefix' => '/areas', 'as' => 'areas'], function () use ($router) {
-      /**
-       * Coincide con la ruta /v1/admin/dependencies/areas y el nombre 'admin.dependencies.areas.index'.
-       */
-      $router->get('/', ['as' => 'index', 'uses' => 'AreaController@index']);
-    });
-    /**
-     * Coincide con la ruta /v1/admin/dependencies/types y el nombre 'admin.dependencies.types.index'.
-     */
     $router->group(['prefix' => '/types', 'as' => 'types'], function () use ($router) {
+      /**
+       * Coincide con la ruta /v1/admin/dependencies/types y el nombre 'admin.dependencies.types.index'.
+       */
       $router->get('/', ['as' => 'index', 'uses' => 'DependencyTypeController@index']);
     });
     /**
      * Coincide con la ruta /v1/admin/dependencies y el nombre 'admin.dependencies.index'.
      */
     $router->get('/', ['as' => 'index', 'uses' => 'DependencyController@index']);
+  });
+
+  $router->group(['prefix' => '/areas', 'as' => 'areas'], function () use ($router) {
+    /**
+     * Coincide con la ruta /v1/admin/areas y el nombre 'admin.areas.index'.
+     */
+    $router->get('/', ['as' => 'index', 'uses' => 'AreaController@index']);
   });
 
   $router->group(['prefix' => '/users', 'as' => 'users'], function () use ($router) {
