@@ -103,4 +103,42 @@ class UserController extends Controller {
         'description' => '',
     ]]);
   }
+
+  public function update(Request $request, $id) {
+    /**
+     * Valida los campos de la petición.
+     */
+    $input = $this->validate($request, [
+      'payroll' => 'bail|nullable|string|min:5|max:10|unique:App\Models\Admin\User',
+      'email'   => 'bail|nullable|string|max:255|email|unique:App\Models\Admin\User',
+      'role_id' => 'bail|nullable|integer|min:1|exists:App\Models\Admin\Role,id',
+      'gender_id' => 'bail|nullable|integer|min:1|exists:App\Models\Admin\Gender,id',
+      'job_id' => 'bail|nullable|integer|min:1|exists:App\Models\Admin\Job,id',
+      'job_level_id' => 'bail|nullable|integer|min:1|exists:App\Models\Admin\JobLevel,id',
+      'payroll_type_category_id' => 'bail|nullable|integer|min:1|exists:App\Models\Admin\PayrollTypesCategory,id',
+      'dependency_area_id' => 'bail|nullable|integer|min:1|exists:App\Models\Admin\DependencyArea,id',
+      'name' => 'bail|nullable|string|min:1|max:60',
+      'firstsurname'  => 'bail|nullable|min:1|max:60',
+      'secondsurname' => 'bail|nullable|min:1|max:60',
+      'phone'  => 'bail|nullable|min:10|max:10',
+      'active' => 'bail|nullable|boolean',
+      'entered_at' => 'bail|nullable|date_format:Y/m/d',
+    ]);
+
+    $user = User::with([
+      'role', 'gender', 'job', 'jobLevel', 'payrollTypeCategory.type',
+      'payrollTypeCategory.category', 'dependencyArea.dependency',
+      'dependencyArea.area',
+    ])->findOrFail($id);
+
+    $user->update($input);
+
+    return (new UserResource($user))
+    ->additional([
+      'message' => [
+        'type' => 'success',
+        'code' => Response::HTTP_OK,
+        'description' => '',
+    ]]);
+  }
 }
