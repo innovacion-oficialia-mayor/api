@@ -36,7 +36,7 @@ class JobLevelController extends Controller {
       'message' => [
         'type' => 'success',
         'code' => Response::HTTP_OK,
-        'description' => "",
+        'description' => '',
     ]]);
   }
 }

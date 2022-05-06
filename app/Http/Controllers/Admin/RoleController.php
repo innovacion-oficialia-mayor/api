@@ -36,7 +36,7 @@ class RoleController extends Controller {
       'message' => [
         'type' => 'success',
         'code' => Response::HTTP_OK,
-        'description' => "",
+        'description' => '',
     ]]);
   }
 }
