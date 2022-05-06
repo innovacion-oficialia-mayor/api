@@ -3,8 +3,8 @@
 namespace App\Http\Resources\Admin;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\Admin\AreaResource;
 use App\Http\Resources\Admin\DependencyTypeResource;
+use App\Http\Resources\Admin\AreaResource;
 
 class DependencyResource extends JsonResource {
   /**

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
 
 class UserController extends Controller {
   /**
@@ -18,6 +19,33 @@ class UserController extends Controller {
    */
   public function __construct() {
     //
+  }
+
+  public function index(Request $request){
+    /**
+     * Valida los parámetros de consulta de la ruta.
+     */
+    $query = $this->validate($request, [
+      'sortBy' => ['bail', 'nullable', 'string', Rule::in(['asc', 'desc'])],
+    ]);
+
+    $sortBy = Arr::get($query, 'sortBy', 'asc');
+
+    return UserResource::collection(User::with([
+      'role', 'gender', 'job', 'jobLevel', 'payrollTypeCategory.type',
+      'payrollTypeCategory.category', 'dependencyArea.dependency',
+      'dependencyArea.area',
+    ])
+    ->orderBy('name', $sortBy)
+    ->orderBy('firstsurname', $sortBy)
+    ->orderBy('secondsurname', $sortBy)
+    ->paginate())
+    ->additional([
+      'message' => [
+        'type' => 'success',
+        'code' => Response::HTTP_OK,
+        'description' => '',
+    ]]);
   }
 
   public function store(Request $request) {
@@ -43,6 +71,36 @@ class UserController extends Controller {
 
     $input['id'] = Str::uuid();
 
-    return User::create($input);
+    $id = User::create($input)->id;
+
+    return (new UserResource(User::with([
+      'role', 'gender', 'job', 'jobLevel', 'payrollTypeCategory.type',
+      'payrollTypeCategory.category', 'dependencyArea.dependency',
+      'dependencyArea.area',
+    ])
+    ->findOrFail($id)))
+    ->additional([
+      'message' => [
+        'type' => 'success',
+        'code' => Response::HTTP_CREATED,
+        'description' => '',
+    ]])
+    ->response()
+    ->setStatusCode(Response::HTTP_CREATED);
+  }
+
+  public function show(Request $request, $id) {
+    return (new UserResource(User::with([
+      'role', 'gender', 'job', 'jobLevel', 'payrollTypeCategory.type',
+      'payrollTypeCategory.category', 'dependencyArea.dependency',
+      'dependencyArea.area',
+    ])
+    ->findOrFail($id)))
+    ->additional([
+      'message' => [
+        'type' => 'success',
+        'code' => Response::HTTP_OK,
+        'description' => '',
+    ]]);
   }
 }

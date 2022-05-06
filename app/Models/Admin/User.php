@@ -14,4 +14,28 @@ class User extends Model {
     'name', 'firstsurname', 'secondsurname', 'phone',
     'password', 'active', 'entered_at',
   ];
+
+  public function role() {
+    return $this->belongsTo(Role::class);
+  }
+
+  public function gender() {
+    return $this->belongsTo(Gender::class);
+  }
+
+  public function job() {
+    return $this->belongsTo(Job::class);
+  }
+
+  public function jobLevel() {
+    return $this->belongsTo(JobLevel::class);
+  }
+
+  public function payrollTypeCategory() {
+    return $this->belongsTo(PayrollTypesCategory::class);
+  }
+
+  public function dependencyArea() {
+    return $this->belongsTo(DependencyArea::class);
+  }
 }
