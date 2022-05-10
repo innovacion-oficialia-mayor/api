@@ -16,6 +16,13 @@ Una API RESTful de sistemas web para Oficialía Mayor.
 * [Lumen 9.x - Un micro framework de PHP por Laravel.](https://lumen.laravel.com/docs/9.x)
 * [MySQL](https://www.mysql.com/) o [MariaDB](https://mariadb.com/) - Un sistema gestor de bases de datos relacionales.
 
+Instala todas las dependencias del proyecto con [composer](https://getcomposer.org/):
+
+```shell
+$ cd api
+$ composer install
+```
+
 ## Configuración de las bases de datos
 
 Crea las bases de datos del proyecto:
@@ -32,15 +39,16 @@ CREATE DATABASE IF NOT EXISTS clima
   COLLATE       = 'utf8mb4_spanish_ci';
 ```
 
-Construye e inicializa las tablas de las bases de datos:
+Construye e inicializa todas las tablas de las bases de datos:
 
 ```shell
-$ cd api
 $ php artisan migrate
 $ php artisan db:seed
 ```
 
 ## Autenticación
+
+Genera los certificados para firmar e identificar los tokens:
 
 ```shell
 $ php artisan jwt:secret
@@ -109,6 +117,7 @@ Administrador inicial:
 * [Programación de tareas con Laravel.](https://laravel.com/docs/9.x/scheduling)
 * [Autenticación con Lumen.](https://lumen.laravel.com/docs/9.x/authentication)
 * [Autenticación con Laravel.](https://laravel.com/docs/9.x/authentication)
+* [JSON Web Tokens.](https://jwt.io/)
 * [Autenticación con JSON Web Tokens para Laravel y Lumen.](https://github.com/PHP-Open-Source-Saver/jwt-auth)
 * [Autorizaciones con Lumen.](https://lumen.laravel.com/docs/9.x/authorization)
 * [Autorizaciones con Laravel.](https://laravel.com/docs/9.x/authorization)
