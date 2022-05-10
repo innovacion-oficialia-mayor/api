@@ -15,6 +15,8 @@ class User extends Model {
     'password', 'active', 'entered_at',
   ];
 
+  protected $hidden = ['password'];
+
   public function role() {
     return $this->belongsTo(Role::class);
   }

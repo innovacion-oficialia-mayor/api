@@ -54,7 +54,7 @@ class UserController extends Controller {
      */
     $input = $this->validate($request, [
       'payroll' => 'bail|required|string|min:5|max:10|unique:App\Models\Admin\User',
-      'email'   => 'bail|nullable|string|max:255|email|unique:App\Models\Admin\User',
+      'email'   => 'bail|nullable|email|max:255|unique:App\Models\Admin\User',
       'role_id' => 'bail|required|integer|min:1|exists:App\Models\Admin\Role,id',
       'gender_id' => 'bail|required|integer|min:1|exists:App\Models\Admin\Gender,id',
       'job_id' => 'bail|required|integer|min:1|exists:App\Models\Admin\Job,id',
@@ -62,14 +62,16 @@ class UserController extends Controller {
       'payroll_type_category_id' => 'bail|required|integer|min:1|exists:App\Models\Admin\PayrollTypesCategory,id',
       'dependency_area_id' => 'bail|required|integer|min:1|exists:App\Models\Admin\DependencyArea,id',
       'name' => 'bail|required|string|min:1|max:60',
-      'firstsurname'  => 'bail|required|min:1|max:60',
-      'secondsurname' => 'bail|required|min:1|max:60',
-      'phone'  => 'bail|required|min:10|max:10',
+      'firstsurname'  => 'bail|required|string|min:1|max:60',
+      'secondsurname' => 'bail|required|string|min:1|max:60',
+      'phone'  => 'bail|required|string|min:10|max:10',
+      'password' => 'bail|nullable|confirmed',
       'active' => 'bail|nullable|boolean',
       'entered_at' => 'bail|required|date_format:Y/m/d',
     ]);
 
     $input['id'] = Str::uuid();
+    $input['password'] = Hash::make($input['password']);
 
     $id = User::create($input)->id;
 
@@ -121,6 +123,7 @@ class UserController extends Controller {
       'firstsurname'  => 'bail|nullable|min:1|max:60',
       'secondsurname' => 'bail|nullable|min:1|max:60',
       'phone'  => 'bail|nullable|min:10|max:10',
+      'password' => 'bail|nullable|confirmed',
       'active' => 'bail|nullable|boolean',
       'entered_at' => 'bail|nullable|date_format:Y/m/d',
     ]);
