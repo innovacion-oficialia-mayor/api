@@ -32,8 +32,10 @@ CREATE DATABASE IF NOT EXISTS clima
   COLLATE       = 'utf8mb4_spanish_ci';
 ```
 
+Construye e inicializa las tablas de las bases de datos:
+
 ```shell
-$ cd api-om
+$ cd api
 $ php artisan migrate
 $ php artisan db:seed
 $ php -S localhost:8000 -t public/
@@ -58,7 +60,9 @@ Administrador inicial:
 * [Estructura de directorios de Laravel.](https://laravel.com/docs/9.x/structure)
 * [Despliegue de aplicaciones Laravel.](https://laravel.com/docs/9.x/deployment)
 * [Ciclo de vida de las peticiones con Laravel.](https://laravel.com/docs/9.x/lifecycle)
+* [Contenedor de servicios de Lumen.](https://lumen.laravel.com/docs/9.x/container)
 * [Contenedor de servicios de Laravel.](https://laravel.com/docs/9.x/container)
+* [Proveedor de servicios de Lumen.](https://lumen.laravel.com/docs/9.x/providers)
 * [Proveedor de servicios de Laravel.](https://laravel.com/docs/9.x/providers)
 * [Facades de Laravel](https://laravel.com/docs/9.x/facades)
 * [Rutas con Lumen.](https://lumen.laravel.com/docs/9.x/routing)
@@ -77,24 +81,47 @@ Administrador inicial:
 * [Respuestas HTTP con Laravel.](https://laravel.com/docs/9.x/responses)
 * [Generador de URLs con Laravel.](https://laravel.com/docs/9.x/urls)
 * [Sesiones HTTP con Laravel.](https://laravel.com/docs/9.x/session)
+* [Validaciones con Lumen.](https://lumen.laravel.com/docs/9.x/validation)
 * [Validaciones con Laravel.](https://laravel.com/docs/9.x/validation)
 * [Manejo de errores con Laravel.](https://laravel.com/docs/9.x/errors)
 * [Logs con Laravel](https://laravel.com/docs/9.x/logging)
 * [Artisan de Laravel.](https://laravel.com/docs/9.x/artisan)
-* [Colecciones de datos con Laravel.](https://laravel.com/docs/9.x/collections)
+* [Uso de caché con Lumen.](https://lumen.laravel.com/docs/9.x/cache)
+* [Uso de caché con Laravel.](https://laravel.com/docs/9.x/cache)
+* [Colección de datos con Laravel.](https://laravel.com/docs/9.x/collections)
 * [Contratos de Laravel](https://laravel.com/docs/9.x/contracts)
+* [Eventos con Lumen.](https://lumen.laravel.com/docs/9.x/events)
 * [Eventos con Laravel.](https://laravel.com/docs/9.x/events)
+* [Almacenamiento de archivos con Laravel.](https://laravel.com/docs/9.x/filesystem)
 * [Herramientas de ayuda de Laravel.](https://laravel.com/docs/9.x/helpers)
 * [Cliente HTTP de Laravel.](https://laravel.com/docs/9.x/http-client)
 * [Localización de idiomas con Laravel.](https://laravel.com/docs/9.x/localization)
+* [Tareas en segundo plano con Lumen.](https://lumen.laravel.com/docs/9.x/queues)
+* [Tareas en segundo plano con Laravel.](https://laravel.com/docs/9.x/queues)
 * [Limitador de velocidad de acciones con Laravel.](https://laravel.com/docs/9.x/rate-limiting)
-* [Pruebas con Laravel.](https://laravel.com/docs/9.x/testing)
-* [Autenticaciones con Laravel.](https://laravel.com/docs/9.x/authentication)
+* [Programación de tareas con Laravel.](https://laravel.com/docs/9.x/scheduling)
+* [Autenticación con Lumen.](https://lumen.laravel.com/docs/9.x/authentication)
+* [Autenticación con Laravel.](https://laravel.com/docs/9.x/authentication)
+* [Autenticación con JSON Web Tokens para Laravel y Lumen.](https://github.com/PHP-Open-Source-Saver/jwt-auth)
+* [Autorizaciones con Lumen.](https://lumen.laravel.com/docs/9.x/authorization)
 * [Autorizaciones con Laravel.](https://laravel.com/docs/9.x/authorization)
 * [Cifrado de contraseñas con Laravel.](https://laravel.com/docs/9.x/hashing)
+* [Bases de datos con Lumen.](https://lumen.laravel.com/docs/9.x/database)
 * [Bases de datos con Laravel.](https://laravel.com/docs/9.x/database)
-* [Eloquent ORM con Laravel.](https://laravel.com/docs/9.x/eloquent)
+* [Constructor de consultas de Laravel.](https://laravel.com/docs/9.x/queries)
+* [Paginación de resultados con Laravel.](https://laravel.com/docs/9.x/pagination)
+* [Migración de bases de datos con Laravel.](https://laravel.com/docs/9.x/migrations)
+* [Inicialización de bases de datos.](https://laravel.com/docs/9.x/seeding)
+* [Eloquent ORM de Laravel.](https://laravel.com/docs/9.x/eloquent)
+* [Relaciones con Eloquent de Laravel.](https://laravel.com/docs/9.x/eloquent-relationships)
 * [Relación muchos a muchos para tablas pivote.](https://youtu.be/07HRysMPaKY)
+* [Colecciones de datos de Eloquent con Laravel.](https://laravel.com/docs/9.x/eloquent-collections)
+* [Representación de recursos para APIs con Laravel.](https://laravel.com/docs/9.x/eloquent-resources)
+* [Conversión de modelos y relaciones a JSON con Laravel.](https://laravel.com/docs/9.x/eloquent-serialization)
+* [Pruebas con Lumen.](https://lumen.laravel.com/docs/9.x/testing)
+* [Pruebas con Laravel.](https://laravel.com/docs/9.x/testing)
+* [Pruebas HTTP con Laravel.](https://laravel.com/docs/9.x/http-tests)
+* [Pruebas a bases de datos con Laravel.](https://laravel.com/docs/9.x/database-testing)
 
 ## Licencia
 
