@@ -32,6 +32,18 @@ CREATE DATABASE IF NOT EXISTS clima
   COLLATE       = 'utf8mb4_spanish_ci';
 ```
 
+```shell
+$ cd api-om
+$ php artisan migrate
+$ php artisan db:seed
+$ php -S localhost:8000 -t public/
+```
+
+Administrador inicial:
+
+* Email: `root@celaya.gob.mx`
+* Contraseña: `12345678`
+
 ## Referencias
 
 * [Cómo elegir una licencia para su obra.](https://www.gnu.org/licenses/license-recommendations.es.html)
