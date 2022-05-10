@@ -38,6 +38,13 @@ Construye e inicializa las tablas de las bases de datos:
 $ cd api
 $ php artisan migrate
 $ php artisan db:seed
+```
+
+## Autenticación
+
+```shell
+$ php artisan jwt:secret
+$ php artisan jwt:generate-certs
 $ php -S localhost:8000 -t public/
 ```
 
