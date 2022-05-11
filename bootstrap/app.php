@@ -24,7 +24,6 @@ $app = new Laravel\Lumen\Application(
 );
 
 // $app->withFacades();
-
 $app->withEloquent();
 
 /*
@@ -60,6 +59,7 @@ $app->singleton(
 */
 
 $app->configure('app');
+$app->configure('auth');
 $app->configure('database');
 $app->configure('jwt');
 

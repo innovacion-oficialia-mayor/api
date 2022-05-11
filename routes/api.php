@@ -18,9 +18,22 @@ $router->get('/', function () use ($router) {
 });
 
 /**
+ * Autenticación de usuarios.
+ */
+$router->group(['prefix' => '/v1/auth', 'as' => 'auth'], function () use ($router) {
+  /**
+   * Coincide con la ruta /v1/auth/login y el nombre 'auth.login'.
+   */
+  $router->post('/login',   ['as' => 'login',   'uses' => 'AuthController@login']);
+  $router->post('/logout',  ['as' => 'logout',  'uses' => 'AuthController@logout']);
+  $router->post('/refresh', ['as' => 'refresh', 'uses' => 'AuthController@refresh']);
+  $router->post('/me',      ['as' => 'me',      'uses' => 'AuthController@me']);
+});
+
+/**
  * Administración y consulta de empleados y dependencias.
  */
-$router->group(['prefix' => '/v1/admin', 'namespace' => 'Admin', 'as' => 'admin'], function () use ($router) {
+$router->group(['prefix' => '/v1/admin', 'middleware' => 'auth:api', 'namespace' => 'Admin', 'as' => 'admin'], function () use ($router) {
   $router->group(['prefix' => '/roles', 'as' => 'roles'], function () use ($router) {
     /**
      * Coincide con la ruta /v1/admin/roles y el nombre 'admin.roles.index'.
