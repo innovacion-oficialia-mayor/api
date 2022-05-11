@@ -23,6 +23,12 @@ $ cd api
 $ composer install
 ```
 
+Copia el archivo `.env.example`, el cual contiene todas las opciones de configuración del proyecto:
+
+```shell
+$ cp .env.example .env
+```
+
 ## Configuración de las bases de datos
 
 Crea las bases de datos del proyecto:
@@ -118,6 +124,7 @@ Administrador inicial:
 * [Autenticación con Lumen.](https://lumen.laravel.com/docs/9.x/authentication)
 * [Autenticación con Laravel.](https://laravel.com/docs/9.x/authentication)
 * [JSON Web Tokens.](https://jwt.io/)
+* [JSON Web Token en Wikipedia.](https://es.wikipedia.org/wiki/JSON_Web_Token)
 * [Autenticación con JSON Web Tokens para Laravel y Lumen.](https://github.com/PHP-Open-Source-Saver/jwt-auth)
 * [Autorizaciones con Lumen.](https://lumen.laravel.com/docs/9.x/authorization)
 * [Autorizaciones con Laravel.](https://laravel.com/docs/9.x/authorization)

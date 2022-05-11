@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\User;
+use App\Http\Resources\Admin\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -28,7 +30,14 @@ class AuthController extends Controller {
     ]);
 
     if (! $token = auth()->attempt($credentials)) {
-      return response()->json(['error' => 'Unauthorized'], 401);
+      return response()->json([
+        'data' => [],
+        'message' => [
+          'type' => 'error',
+          'code' => Response::HTTP_UNAUTHORIZED,
+          'description' => 'Unauthorized.',
+        ]
+      ], Response::HTTP_UNAUTHORIZED);
     }
 
     return $this->respondWithToken($token);
@@ -40,7 +49,18 @@ class AuthController extends Controller {
    * @return \Illuminate\Http\JsonResponse
    */
   public function me() {
-    return response()->json(auth()->user());
+    return (new UserResource(User::with([
+      'role', 'gender', 'job', 'jobLevel', 'payrollTypeCategory.type',
+      'payrollTypeCategory.category', 'dependencyArea.dependency',
+      'dependencyArea.area',
+    ])
+    ->findOrFail(auth()->id())))
+    ->additional([
+      'message' => [
+        'type' => 'success',
+        'code' => Response::HTTP_OK,
+        'description' => '',
+    ]]);
   }
 
   /**
@@ -50,7 +70,11 @@ class AuthController extends Controller {
    */
   public function logout() {
     auth()->logout();
-    return response()->json(['message' => 'Successfully logged out']);
+    return response()->json(['message' => [
+      'type' => 'success',
+      'code' => Response::HTTP_OK,
+      'description' => 'Successfully logged out.'
+    ]]);
   }
 
   /**
@@ -71,9 +95,15 @@ class AuthController extends Controller {
    */
   protected function respondWithToken($token) {
     return response()->json([
-      'access_token' => $token,
-      'token_type' => 'bearer',
-      'expires_in' => auth()->factory()->getTTL() * 60,
-    ]);
+      'data' => [
+        'access_token' => $token,
+        'token_type' => 'bearer',
+        'expires_in' => auth()->factory()->getTTL() / 60,
+      ],
+      'message' => [
+        'type' => 'success',
+        'code' => Response::HTTP_OK,
+        'description' => 'Successfully logged in.',
+      ]]);
   }
 }
