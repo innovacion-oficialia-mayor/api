@@ -23,7 +23,7 @@ $ cd api
 $ composer install
 ```
 
-Copia el archivo `.env.example`, el cual contiene todas las opciones de configuración del proyecto:
+Copia el archivo `.env.example` (contiene todas las opciones de configuración del proyecto):
 
 ```shell
 $ cp .env.example .env
@@ -61,6 +61,8 @@ $ php artisan jwt:secret
 $ php artisan jwt:generate-certs
 $ php -S localhost:8000 -t public/
 ```
+
+> Utiliza [jwt-auth](https://github.com/PHP-Open-Source-Saver/jwt-auth).
 
 Administrador inicial:
 

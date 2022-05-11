@@ -26,7 +26,7 @@ class AuthController extends Controller {
   public function login(Request $request) {
     $credentials = $this->validate($request, [
       'email' => 'bail|required|email|max:255',
-      'password' => 'bail|required',
+      'password' => 'bail|required|string|max:255',
     ]);
 
     if (! $token = auth()->attempt($credentials)) {

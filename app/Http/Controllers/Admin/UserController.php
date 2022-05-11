@@ -10,6 +10,7 @@ use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller {
@@ -62,11 +63,11 @@ class UserController extends Controller {
       'job_level_id' => 'bail|required|integer|min:1|exists:App\Models\Admin\JobLevel,id',
       'payroll_type_category_id' => 'bail|required|integer|min:1|exists:App\Models\Admin\PayrollTypesCategory,id',
       'dependency_area_id' => 'bail|required|integer|min:1|exists:App\Models\Admin\DependencyArea,id',
-      'name' => 'bail|required|string|min:1|max:60',
-      'firstsurname'  => 'bail|required|string|min:1|max:60',
-      'secondsurname' => 'bail|required|string|min:1|max:60',
+      'name' => 'bail|required|string|max:60',
+      'firstsurname'  => 'bail|required|string|max:60',
+      'secondsurname' => 'bail|required|string|max:60',
       'phone'  => 'bail|required|string|min:10|max:10',
-      'password' => 'bail|nullable|confirmed',
+      'password' => ['bail', 'nullable', Password::defaults(), 'confirmed'],
       'active' => 'bail|nullable|boolean',
       'entered_at' => 'bail|required|date_format:Y/m/d',
     ]);
@@ -120,11 +121,11 @@ class UserController extends Controller {
       'job_level_id' => 'bail|nullable|integer|min:1|exists:App\Models\Admin\JobLevel,id',
       'payroll_type_category_id' => 'bail|nullable|integer|min:1|exists:App\Models\Admin\PayrollTypesCategory,id',
       'dependency_area_id' => 'bail|nullable|integer|min:1|exists:App\Models\Admin\DependencyArea,id',
-      'name' => 'bail|nullable|string|min:1|max:60',
-      'firstsurname'  => 'bail|nullable|min:1|max:60',
-      'secondsurname' => 'bail|nullable|min:1|max:60',
+      'name' => 'bail|nullable|string|max:60',
+      'firstsurname'  => 'bail|nullable|max:60',
+      'secondsurname' => 'bail|nullable|max:60',
       'phone'  => 'bail|nullable|min:10|max:10',
-      'password' => 'bail|nullable|confirmed',
+      'password' => ['bail', 'nullable', Password::defaults(), 'confirmed'],
       'active' => 'bail|nullable|boolean',
       'entered_at' => 'bail|nullable|date_format:Y/m/d',
     ]);
@@ -134,6 +135,9 @@ class UserController extends Controller {
       'payrollTypeCategory.category', 'dependencyArea.dependency',
       'dependencyArea.area',
     ])->findOrFail($id);
+
+    if (Arr::exists($input, 'password'))
+      $input['password'] = Hash::make($input['password']);
 
     $user->update($input);
 
