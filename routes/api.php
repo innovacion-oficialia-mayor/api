@@ -33,7 +33,7 @@ $router->group(['prefix' => '/v1/auth', 'as' => 'auth'], function () use ($route
 /**
  * Administración y consulta de empleados y dependencias.
  */
-$router->group(['prefix' => '/v1/admin', 'middleware' => 'auth:api', 'namespace' => 'Admin', 'as' => 'admin'], function () use ($router) {
+$router->group(['prefix' => '/v1/admin', 'middleware' => ['auth:api', 'can:isAdmin'], 'namespace' => 'Admin', 'as' => 'admin'], function () use ($router) {
   $router->group(['prefix' => '/roles', 'as' => 'roles'], function () use ($router) {
     /**
      * Coincide con la ruta /v1/admin/roles y el nombre 'admin.roles.index'.

@@ -49,8 +49,8 @@ class Handler extends ExceptionHandler {
    */
   public function render($request, Throwable $exception) {
     if($exception instanceof AuthorizationException) {
-      $code = $exception->response()->code();
-      $desc = [$exception->response()->message()];
+      $code = Response::HTTP_FORBIDDEN;
+      $desc = [$exception->getMessage()];
     } elseif($exception instanceof HttpException) {
       $code = $exception->getStatusCode();
       $desc = [Response::$statusTexts[$code]];
