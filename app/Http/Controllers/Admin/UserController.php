@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\User;
 use App\Http\Resources\Admin\UserResource;
+use App\Models\Admin\Role;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
@@ -69,11 +70,19 @@ class UserController extends Controller {
       'phone'  => 'bail|required|string|min:10|max:10',
       'password' => ['bail', 'nullable', Password::defaults(), 'confirmed'],
       'active' => 'bail|nullable|boolean',
-      'entered_at' => 'bail|required|date_format:Y/m/d',
+      'entered_at' => 'bail|required|date_format:Y/m/d,Y-m-d',
     ]);
 
+    if (Role::find($input['role_id'])->name == 'admin')
+      $this->validate($request,[
+        'email' => 'required',
+        'password' => 'required',
+      ]);
+
     $input['id'] = Str::uuid();
-    $input['password'] = Hash::make($input['password']);
+
+    if (Arr::exists($input, 'password'))
+      $input['password'] = Hash::make($input['password']);
 
     $id = User::create($input)->id;
 
@@ -127,17 +136,17 @@ class UserController extends Controller {
       'phone'  => 'bail|nullable|min:10|max:10',
       'password' => ['bail', 'nullable', Password::defaults(), 'confirmed'],
       'active' => 'bail|nullable|boolean',
-      'entered_at' => 'bail|nullable|date_format:Y/m/d',
+      'entered_at' => 'bail|nullable|date_format:Y/m/d,Y-m-d',
     ]);
+
+    if (Arr::exists($input, 'password'))
+      $input['password'] = Hash::make($input['password']);
 
     $user = User::with([
       'role', 'gender', 'job', 'jobLevel', 'payrollTypeCategory.type',
       'payrollTypeCategory.category', 'dependencyArea.dependency',
       'dependencyArea.area',
     ])->findOrFail($id);
-
-    if (Arr::exists($input, 'password'))
-      $input['password'] = Hash::make($input['password']);
 
     $user->update($input);
 
