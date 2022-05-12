@@ -29,18 +29,19 @@ class AuthController extends Controller {
       'password' => 'bail|required|string|max:255',
     ]);
 
-    if (! $token = auth()->attempt($credentials)) {
-      return response()->json([
-        'data' => [],
-        'message' => [
-          'type' => 'error',
-          'code' => Response::HTTP_UNAUTHORIZED,
-          'description' => 'Unauthorized.',
-        ]
-      ], Response::HTTP_UNAUTHORIZED);
-    }
+    $token = auth()->attempt($credentials);
 
-    return $this->respondWithToken($token);
+    if ($token && auth()->user()->active)
+      return $this->respondWithToken($token);
+
+    return response()->json([
+      'data' => [],
+      'message' => [
+        'type' => 'error',
+        'code' => Response::HTTP_UNAUTHORIZED,
+        'description' => 'Unauthorized.',
+      ]
+    ], Response::HTTP_UNAUTHORIZED);
   }
 
   /**
