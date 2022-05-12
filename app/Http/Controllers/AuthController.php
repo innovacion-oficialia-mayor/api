@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\User;
+use App\Models\Admin\Role;
 use App\Http\Resources\Admin\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -15,7 +16,37 @@ class AuthController extends Controller {
    * @return void
    */
   public function __construct() {
-    $this->middleware('auth:api', ['except' => ['login']]);
+    $this->middleware('auth:api', ['except' => ['adminLogin', 'login']]);
+  }
+
+  /**
+   * Get a JWT via given credentials.
+   *
+   * @return \Illuminate\Http\JsonResponse
+   */
+  public function adminLogin(Request $request) {
+    $credentials = $this->validate($request, [
+      'email' => 'bail|required|email|max:255',
+      'password' => 'bail|required|string|max:255',
+    ]);
+
+    $credentials['active'] = true;
+
+    $token = auth()->attempt($credentials);
+
+    $role = Role::find(auth()->user()?->role_id)?->name;
+
+    if ($token && $role == 'admin')
+      return $this->respondWithToken($token);
+
+    return response()->json([
+      'data' => [],
+      'message' => [
+        'type' => 'error',
+        'code' => Response::HTTP_UNAUTHORIZED,
+        'description' => 'Unauthorized.',
+      ]
+    ], Response::HTTP_UNAUTHORIZED);
   }
 
   /**
@@ -25,13 +56,13 @@ class AuthController extends Controller {
    */
   public function login(Request $request) {
     $credentials = $this->validate($request, [
-      'email' => 'bail|required|email|max:255',
-      'password' => 'bail|required|string|max:255',
+      'payroll' => 'bail|required|string|max:10|confirmed',
     ]);
 
-    $token = auth()->attempt($credentials);
+    $user = User::where('payroll', $credentials['payroll'])
+                ->firstWhere('active', true);
 
-    if ($token && auth()->user()->active)
+    if ($user && $token = auth()->login($user))
       return $this->respondWithToken($token);
 
     return response()->json([

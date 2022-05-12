@@ -24,10 +24,11 @@ $router->group(['prefix' => '/v1/auth', 'as' => 'auth'], function () use ($route
   /**
    * Coincide con la ruta /v1/auth/login y el nombre 'auth.login'.
    */
-  $router->post('/login',   ['as' => 'login',   'uses' => 'AuthController@login']);
-  $router->post('/logout',  ['as' => 'logout',  'uses' => 'AuthController@logout']);
-  $router->post('/refresh', ['as' => 'refresh', 'uses' => 'AuthController@refresh']);
-  $router->post('/me',      ['as' => 'me',      'uses' => 'AuthController@me']);
+  $router->post('/admin/login', ['as' => 'adminLogin', 'uses' => 'AuthController@adminLogin']);
+  $router->post('/login',       ['as' => 'login',      'uses' => 'AuthController@login']);
+  $router->post('/logout',      ['as' => 'logout',     'uses' => 'AuthController@logout']);
+  $router->post('/refresh',     ['as' => 'refresh',    'uses' => 'AuthController@refresh']);
+  $router->post('/me',          ['as' => 'me',         'uses' => 'AuthController@me']);
 });
 
 /**
