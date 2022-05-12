@@ -28,7 +28,7 @@ class AuthServiceProvider extends ServiceProvider {
     // the User instance via an API token or any other method necessary.
 
     Gate::define('isAdmin', function (User $user) {
-      return $user->role->name == 'admin';
+      return $user->role->name == 'admin' && auth()->payload()->get('isAdmin');
     });
   }
 }

@@ -142,15 +142,16 @@ class UserController extends Controller {
     if (Arr::exists($input, 'password'))
       $input['password'] = Hash::make($input['password']);
 
-    $user = User::with([
-      'role', 'gender', 'job', 'jobLevel', 'payrollTypeCategory.type',
-      'payrollTypeCategory.category', 'dependencyArea.dependency',
-      'dependencyArea.area',
-    ])->findOrFail($id);
+    $user = User::findOrFail($id);
 
     $user->update($input);
 
-    return (new UserResource($user))
+    return (new UserResource(User::with([
+      'role', 'gender', 'job', 'jobLevel', 'payrollTypeCategory.type',
+      'payrollTypeCategory.category', 'dependencyArea.dependency',
+      'dependencyArea.area',
+    ])
+    ->find($id)))
     ->additional([
       'message' => [
         'type' => 'success',
