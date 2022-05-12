@@ -14,7 +14,7 @@ class AreaResource extends JsonResource {
    */
   public function toArray($request) {
     return [
-      'id'    => $this->id,
+      'id' => $this->id,
       'dependency_area_id' => $this->whenPivotLoaded('dependency_areas', function () {
         return $this->pivot->id;
       }),

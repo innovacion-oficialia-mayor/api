@@ -22,7 +22,7 @@ $router->get('/', function () use ($router) {
  */
 $router->group(['prefix' => '/v1/auth', 'as' => 'auth'], function () use ($router) {
   /**
-   * Coincide con la ruta /v1/auth/login y el nombre 'auth.login'.
+   * Coincide con la ruta /v1/auth/login y el nombre 'auth.adminLogin'.
    */
   $router->post('/admin/login', ['as' => 'adminLogin', 'uses' => 'AuthController@adminLogin']);
   $router->post('/login',       ['as' => 'login',      'uses' => 'AuthController@login']);

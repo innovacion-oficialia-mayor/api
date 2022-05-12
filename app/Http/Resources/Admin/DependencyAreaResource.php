@@ -15,7 +15,7 @@ class DependencyAreaResource extends JsonResource {
    */
   public function toArray($request) {
     return [
-      'id'   => $this->id,
+      'id' => $this->id,
       'dependency' => new DependencyResource($this->whenLoaded('dependency')),
       'area' => new AreaResource($this->whenLoaded('area')),
     ];
