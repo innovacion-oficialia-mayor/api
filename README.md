@@ -18,14 +18,14 @@ Una API RESTful de sistemas web para Oficialía Mayor.
 
 Instala todas las dependencias del proyecto con [composer](https://getcomposer.org/):
 
-```shell
+```console
 $ cd api
 $ composer install
 ```
 
 Copia el archivo `.env.example` (contiene todas las opciones de configuración del proyecto):
 
-```shell
+```console
 $ cp .env.example .env
 ```
 
@@ -47,7 +47,7 @@ CREATE DATABASE IF NOT EXISTS clima
 
 Construye e inicializa todas las tablas de las bases de datos:
 
-```shell
+```console
 $ php artisan migrate
 $ php artisan db:seed
 ```
@@ -56,7 +56,7 @@ $ php artisan db:seed
 
 Genera los certificados para firmar e identificar los tokens:
 
-```shell
+```console
 $ php artisan jwt:secret
 $ php artisan jwt:generate-certs
 $ php -S localhost:8000 -t public/
@@ -150,7 +150,7 @@ Administrador inicial:
 
 ## Licencia
 
-```text
+```
 API de Oficialía Mayor - Una API RESTful de sistemas web para Oficialía Mayor.
 
 Copyright (C) 2022 - Ricardo García Jiménez <ricardogj08@riseup.net>,
