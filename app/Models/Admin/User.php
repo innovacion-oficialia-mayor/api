@@ -13,7 +13,7 @@ use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 class User extends Model implements AuthenticatableContract, AuthorizableContract, JWTSubject {
   use Authenticatable, Authorizable, HasFactory;
 
-  public    $incrementing = false;
+  public $incrementing = false;
   protected $keyType  = 'string';
   protected $fillable = [
     'id', 'payroll', 'email', 'role_id',

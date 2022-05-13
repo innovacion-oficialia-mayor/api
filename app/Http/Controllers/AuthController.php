@@ -32,7 +32,7 @@ class AuthController extends Controller {
 
     $credentials['active'] = true;
 
-    $token = auth()->claims(['isAdmin' => true])
+    $token = auth()->claims(['admin' => true])
                    ->attempt($credentials);
 
     $role = Role::find(auth()->user()?->role_id)?->name;

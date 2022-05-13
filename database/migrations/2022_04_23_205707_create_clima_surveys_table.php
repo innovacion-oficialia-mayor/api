@@ -24,6 +24,9 @@ return new class extends Migration {
 
       $table->unsignedBigInteger('finished_at');
 
+      $table->boolean('active')
+            ->default(false);
+
       $table->dateTime('created_at')
             ->useCurrent();
 

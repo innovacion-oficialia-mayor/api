@@ -34,7 +34,7 @@ $router->group(['prefix' => '/v1/auth', 'as' => 'auth'], function () use ($route
 /**
  * Administración y consulta de empleados y dependencias.
  */
-$router->group(['prefix' => '/v1/admin', 'middleware' => ['auth:api', 'can:isAdmin'], 'namespace' => 'Admin', 'as' => 'admin'], function () use ($router) {
+$router->group(['prefix' => '/v1/admin', 'middleware' => ['auth:api', 'can:admin'], 'namespace' => 'Admin', 'as' => 'admin'], function () use ($router) {
   $router->group(['prefix' => '/roles', 'as' => 'roles'], function () use ($router) {
     /**
      * Coincide con la ruta /v1/admin/roles y el nombre 'admin.roles.index'.
@@ -105,5 +105,18 @@ $router->group(['prefix' => '/v1/admin', 'middleware' => ['auth:api', 'can:isAdm
     $router->get('/{id}', ['as' => 'show',   'uses' => 'UserController@show']);
     $router->post('/',    ['as' => 'store',  'uses' => 'UserController@store']);
     $router->put('/{id}', ['as' => 'update', 'uses' => 'UserController@update']);
+  });
+});
+
+/**
+ * Clima Laboral y Cultura Organizacional.
+ */
+$router->group(['prefix' => '/v1/clima', 'middleware' => ['auth:api', 'can:admin'], 'namespace' => 'Clima', 'as' => 'clima'], function () use ($router) {
+  $router->group(['prefix' => '/surveys', 'as' => 'surveys'], function () use ($router) {
+    /**
+     * Coincide con la ruta /v1/clima/surveys y el nombre 'clima.surveys.index'.
+     */
+    $router->get('/',  ['as' => 'index', 'uses' => 'SurveyController@index']);
+    $router->post('/', ['as' => 'store', 'uses' => 'SurveyController@store']);
   });
 });
