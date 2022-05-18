@@ -4,7 +4,7 @@ namespace Database\Seeders\Admin;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Admin\DependencyArea;
 
 class DependencyAreaSeeder extends Seeder {
   /**
@@ -14,7 +14,7 @@ class DependencyAreaSeeder extends Seeder {
    * @return void
    */
   public function run() {
-    DB::table('dependency_areas')->insert([
+    DependencyArea::insert([
       ['id' =>  1, 'dependency_id' =>  1, 'area_id' => 1],
       ['id' =>  2, 'dependency_id' =>  1, 'area_id' => 2],
       ['id' =>  3, 'dependency_id' =>  1, 'area_id' => 3],

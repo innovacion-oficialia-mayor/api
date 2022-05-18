@@ -4,7 +4,7 @@ namespace Database\Seeders\Admin;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Admin\Area;
 
 class AreaSeeder extends Seeder {
   /**
@@ -14,7 +14,7 @@ class AreaSeeder extends Seeder {
    * @return void
    */
   public function run() {
-    DB::table('areas')->insert([
+    Area::insert([
       ['id' =>  1, 'name' => 'Contraloría Municipal'],
       ['id' =>  2, 'name' => 'Unidad de Asuntos Jurídicos y Responsabilidades'],
       ['id' =>  3, 'name' => 'Unidad de Auditorías Financieras y Control Interno'],

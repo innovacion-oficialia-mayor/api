@@ -4,7 +4,7 @@ namespace Database\Seeders\Admin;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Admin\DependencyType;
 
 class DependencyTypeSeeder extends Seeder {
   /**
@@ -14,7 +14,7 @@ class DependencyTypeSeeder extends Seeder {
    * @return void
    */
   public function run() {
-    DB::table('dependency_types')->insert([
+    DependencyType::insert([
       ['id' => 1, 'name' => 'Centralizada'],
       ['id' => 2, 'name' => 'Descentralizada'],
     ]);

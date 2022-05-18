@@ -4,7 +4,7 @@ namespace Database\Seeders\Admin;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Admin\JobLevel;
 
 class JobLevelSeeder extends Seeder {
   /**
@@ -14,7 +14,7 @@ class JobLevelSeeder extends Seeder {
    * @return void
    */
   public function run() {
-    DB::table('job_levels')->insert([
+    JobLevel::insert([
       ['id' => 1, 'name' => '1'],
       ['id' => 2, 'name' => '2'],
       ['id' => 3, 'name' => '3'],

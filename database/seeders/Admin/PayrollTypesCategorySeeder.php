@@ -4,7 +4,7 @@ namespace Database\Seeders\Admin;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Admin\PayrollTypesCategory;
 
 class PayrollTypesCategorySeeder extends Seeder {
   /**
@@ -14,7 +14,7 @@ class PayrollTypesCategorySeeder extends Seeder {
    * @return void
    */
   public function run() {
-    DB::table('payroll_types_categories')->insert([
+    PayrollTypesCategory::insert([
       ['id' => 1, 'payroll_type_id' => 1, 'payroll_category_id' => 1],
       ['id' => 2, 'payroll_type_id' => 1, 'payroll_category_id' => 2],
       ['id' => 3, 'payroll_type_id' => 2, 'payroll_category_id' => 3],

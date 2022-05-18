@@ -4,7 +4,7 @@ namespace Database\Seeders\Admin;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Admin\Role;
 
 class RoleSeeder extends Seeder {
   /**
@@ -14,7 +14,7 @@ class RoleSeeder extends Seeder {
    * @return void
    */
   public function run() {
-    DB::table('roles')->insert([
+    Role::insert([
       ['id' => 1, 'name' => 'admin',    'description' => 'Auxiliar de Innovación Gubernamental'],
       ['id' => 2, 'name' => 'enlace',   'description' => 'Enlace Administrativo'],
       ['id' => 3, 'name' => 'servidor', 'description' => 'Servidor Público'],

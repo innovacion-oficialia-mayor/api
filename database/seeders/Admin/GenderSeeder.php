@@ -4,7 +4,7 @@ namespace Database\Seeders\Admin;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Admin\Gender;
 
 class GenderSeeder extends Seeder {
   /**
@@ -14,7 +14,7 @@ class GenderSeeder extends Seeder {
    * @return void
    */
   public function run() {
-    DB::table('genders')->insert([
+    Gender::insert([
       ['id' => 1, 'name' => 'Masculino'],
       ['id' => 2, 'name' => 'Femenino'],
       ['id' => 3, 'name' => 'Otro'],

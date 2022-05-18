@@ -22,7 +22,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     'name', 'firstsurname', 'secondsurname', 'phone',
     'password', 'active', 'entered_at',
   ];
-
+  protected $attributes = ['active' => false];
   protected $hidden = ['password'];
 
   /**
