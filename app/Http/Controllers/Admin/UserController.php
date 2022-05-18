@@ -30,9 +30,11 @@ class UserController extends Controller {
      */
     $query = $this->validate($request, [
       'sortBy' => ['bail', 'nullable', 'string', Rule::in(['asc', 'desc'])],
+      'limit' => 'bail|nullable|integer|min:1',
     ]);
 
     $sortBy = Arr::get($query, 'sortBy', 'asc');
+    $limit  = Arr::get($query, 'limit', 15);
 
     return UserResource::collection(User::with([
       'role', 'gender', 'job', 'jobLevel', 'payrollTypeCategory.type',
@@ -42,7 +44,7 @@ class UserController extends Controller {
     ->orderBy('name', $sortBy)
     ->orderBy('firstsurname', $sortBy)
     ->orderBy('secondsurname', $sortBy)
-    ->paginate())
+    ->paginate($limit))
     ->additional([
       'message' => [
         'type' => 'success',

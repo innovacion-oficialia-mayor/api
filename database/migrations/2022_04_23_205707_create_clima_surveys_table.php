@@ -18,7 +18,8 @@ return new class extends Migration {
       $table->uuid('id')
             ->primary();
 
-      $table->unsignedTinyInteger('percentage_users');
+      $table->unsignedTinyInteger('percentage_users')
+            ->default(12);
 
       $table->unsignedBigInteger('started_at');
 

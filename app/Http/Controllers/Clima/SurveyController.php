@@ -27,12 +27,14 @@ class SurveyController extends Controller {
      */
     $query = $this->validate($request, [
       'sortBy' => ['bail', 'nullable', 'string', Rule::in(['asc', 'desc'])],
+      'limit' => 'bail|nullable|integer|min:1',
     ]);
 
     $sortBy = Arr::get($query, 'sortBy', 'desc');
+    $limit  = Arr::get($query, 'limit', 15);
 
     return SurveyResource::collection(Survey::orderBy('created_at', $sortBy)
-    ->paginate())
+    ->paginate($limit))
     ->additional([
       'message' => [
         'type' => 'success',
@@ -46,8 +48,8 @@ class SurveyController extends Controller {
      * Valida los campos de la petición.
      */
     $input = $this->validate($request, [
-      'percentage_users' => 'bail|required|integer|min:12|max:100',
-      'started_at' => 'bail|required|date_format:Y/m/d,Y-m-d',
+      'percentage_users' => 'bail|nullable|integer|min:12|max:100',
+      'started_at' => 'bail|required|date_format:Y/m/d,Y-m-d|after_or_equal:today',
       'finished_at' => 'bail|required|date_format:Y/m/d,Y-m-d|after:started_at',
     ]);
 

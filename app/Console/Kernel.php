@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Laravel\Lumen\Console\Kernel as ConsoleKernel;
+use App\Models\Clima\Survey;
 
 class Kernel extends ConsoleKernel {
   /**
@@ -22,6 +23,22 @@ class Kernel extends ConsoleKernel {
    * @return void
    */
   protected function schedule(Schedule $schedule) {
-    //
+    $schedule->call(function () {
+      /**
+       * Habilita encuestas de clima laboral.
+       */
+      Survey::where('started_at', '<=', time())
+      ->where('active', false)
+      ->update(['active' => true]);
+    })->everyMinute();
+
+    $schedule->call(function () {
+      /**
+       * Deshabilita encuestas de clima laboral.
+       */
+      Survey::where('finished_at', '<=', time())
+      ->where('active', true)
+      ->update(['active' => false]);
+    })->everyMinute();
   }
 }
