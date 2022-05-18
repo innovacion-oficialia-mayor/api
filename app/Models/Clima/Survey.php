@@ -9,5 +9,5 @@ class Survey extends Model {
   protected $connection = 'clima';
   protected $keyType  = 'string';
   protected $fillable = ['id', 'percentage_users', 'started_at', 'finished_at', 'active'];
-  protected $attributes = ['active' => false];
+  protected $attributes = ['percentage_users' => 12, 'active' => false];
 }

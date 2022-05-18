@@ -4,7 +4,7 @@ namespace Database\Seeders\Clima;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Clima\Factor;
 
 class FactorSeeder extends Seeder {
   /**
@@ -14,7 +14,7 @@ class FactorSeeder extends Seeder {
    * @return void
    */
   public function run() {
-    DB::connection('clima')->table('factors')->insert([
+    Factor::insert([
       ['id' =>  1, 'heading_id' => 1, 'name' => 'Reconocimiento Laboral'],
       ['id' =>  2, 'heading_id' => 1, 'name' => 'Capacitación y Desarrollo'],
       ['id' =>  3, 'heading_id' => 1, 'name' => 'Mejora y Cambio'],

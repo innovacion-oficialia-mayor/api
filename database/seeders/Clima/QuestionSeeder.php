@@ -4,7 +4,7 @@ namespace Database\Seeders\Clima;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Clima\Question;
 
 class QuestionSeeder extends Seeder {
   /**
@@ -14,7 +14,7 @@ class QuestionSeeder extends Seeder {
    * @return void
    */
   public function run() {
-    DB::connection('clima')->table('questions')->insert([
+    Question::insert([
       ['id' =>   1, 'factor_id' =>  1, 'body' => 'En tu área se reconoce el logro de resultados.'],
       ['id' =>   2, 'factor_id' =>  1, 'body' => 'En tu área operan mecanismos de reconocimiento al personal.'],
       ['id' =>   3, 'factor_id' =>  1, 'body' => 'Tu Jefe(a) te reconoce cuando logras los objetivos esperados.'],

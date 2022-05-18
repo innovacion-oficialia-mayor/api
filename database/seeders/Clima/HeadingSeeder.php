@@ -4,7 +4,7 @@ namespace Database\Seeders\Clima;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Clima\Heading;
 
 class HeadingSeeder extends Seeder {
   /**
@@ -14,7 +14,7 @@ class HeadingSeeder extends Seeder {
    * @return void
    */
   public function run() {
-    DB::connection('clima')->table('headings')->insert([
+    Heading::insert([
       ['id' => 1, 'name' => 'Clima Laboral'],
       ['id' => 2, 'name' => 'Cultura Organizacional'],
       ['id' => 3, 'name' => 'Percepción Afectiva Laboral'],

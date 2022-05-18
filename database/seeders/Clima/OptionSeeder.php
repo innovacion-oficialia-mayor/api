@@ -4,7 +4,7 @@ namespace Database\Seeders\Clima;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Clima\Option;
 
 class OptionSeeder extends Seeder {
   /**
@@ -14,7 +14,7 @@ class OptionSeeder extends Seeder {
    * @return void
    */
   public function run() {
-    DB::connection('clima')->table('options')->insert([
+    Option::insert([
       ['id' => 1, 'body' => 'Alto'],
       ['id' => 2, 'body' => 'Medio Alto'],
       ['id' => 3, 'body' => 'Medio Bajo'],
