@@ -51,6 +51,21 @@ return [
       'timezone' => env('DB_ADMIN_TIMEZONE', '+00:00'),
     ],
 
+    /*
+    'admin' => [
+      'driver' => 'pgsql',
+      'host' => env('DB_ADMIN_HOST', '127.0.0.1'),
+      'port' => env('DB_ADMIN_PORT', 5432),
+      'database' => env('DB_ADMIN_DATABASE', 'admin'),
+      'username' => env('DB_ADMIN_USERNAME', 'root'),
+      'password' => env('DB_ADMIN_PASSWORD', 'root'),
+      'charset' => env('DB_ADMIN_CHARSET', 'utf8'),
+      'prefix' => env('DB_ADMIN_PREFIX', ''),
+      'search_path' => env('DB_ADMIN_SCHEMA', 'public'),
+      'sslmode' => env('DB_ADMIN_SSL_MODE', 'prefer'),
+    ],
+    */
+
     'clima' => [
       'driver' => 'mysql',
       'host' => env('DB_CLIMA_HOST', '127.0.0.1'),
@@ -66,6 +81,21 @@ return [
       'engine' => env('DB_CLIMA_ENGINE'),
       'timezone' => env('DB_CLIMA_TIMEZONE', '+00:00'),
     ],
+
+    /*
+    'clima' => [
+      'driver' => 'pgsql',
+      'host' => env('DB_CLIMA_HOST', '127.0.0.1'),
+      'port' => env('DB_CLIMA_PORT', 5432),
+      'database' => env('DB_CLIMA_DATABASE', 'clima'),
+      'username' => env('DB_CLIMA_USERNAME', 'root'),
+      'password' => env('DB_CLIMA_PASSWORD', 'root'),
+      'charset' => env('DB_CLIMA_CHARSET', 'utf8'),
+      'prefix' => env('DB_CLIMA_PREFIX', ''),
+      'search_path' => env('DB_CLIMA_SCHEMA', 'public'),
+      'sslmode' => env('DB_CLIMA_SSL_MODE', 'prefer'),
+    ],
+    */
 
   ],
 

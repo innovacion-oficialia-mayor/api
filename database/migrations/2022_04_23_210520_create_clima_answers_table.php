@@ -20,8 +20,8 @@ return new class extends Migration {
 
       $table->foreignUuid('survey_id')
             ->constrained()
-            ->restrictOnUpdate()
-            ->restrictOnDelete();
+            ->cascadeOnUpdate()
+            ->cascadeOnDelete();
 
       $db = DB::connection('admin')->getDatabaseName();
 
