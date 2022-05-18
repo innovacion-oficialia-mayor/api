@@ -117,4 +117,23 @@ $router->group(['prefix' => '/v1/clima', 'middleware' => ['auth:api', 'can:admin
     $router->get('/',  ['as' => 'index', 'uses' => 'SurveyController@index']);
     $router->post('/', ['as' => 'store', 'uses' => 'SurveyController@store']);
   });
+
+  $router->group(['prefix' => '/questions', 'as' => 'questions'], function () use ($router) {
+    $router->group(['prefix' => '/headings', 'as' => 'headings'], function () use ($router) {
+      /**
+       * Coincide con la ruta /v1/clima/questions/headings y el nombre 'clima.questions.headings.index'.
+       */
+      $router->get('/',  ['as' => 'index', 'uses' => 'HeadingController@index']);
+    });
+    $router->group(['prefix' => '/factors', 'as' => 'factors'], function () use ($router) {
+      /**
+       * Coincide con la ruta /v1/clima/questions/factors y el nombre 'clima.questions.factors.index'.
+       */
+      $router->get('/',  ['as' => 'index', 'uses' => 'FactorController@index']);
+    });
+    /**
+     * Coincide con la ruta /v1/clima/questions y el nombre 'clima.questions.index'.
+     */
+    $router->get('/',  ['as' => 'index', 'uses' => 'QuestionController@index']);
+  });
 });

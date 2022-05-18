@@ -8,4 +8,8 @@ class Heading extends Model {
   public $timestamps = false;
   protected $connection = 'clima';
   protected $fillable = ['id', 'name'];
+
+  public function factors() {
+    return $this->hasMany(Factor::class);
+  }
 }
