@@ -34,7 +34,8 @@ class SurveyController extends Controller {
     $limit  = Arr::get($query, 'limit', 15);
 
     return SurveyResource::collection(Survey::orderBy('created_at', $sortBy)
-    ->paginate($limit))
+    ->paginate($limit)
+    ->withQueryString())
     ->additional([
       'message' => [
         'type' => 'success',

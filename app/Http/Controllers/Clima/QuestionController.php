@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 
 class QuestionController extends Controller {
   /**
@@ -38,7 +37,8 @@ class QuestionController extends Controller {
       $query->orderBy('id', $sortBy);
     }])
     ->orderBy('id', $sortBy)
-    ->paginate($limit))
+    ->paginate($limit)
+    ->withQueryString())
     ->additional([
       'message' => [
         'type' => 'success',

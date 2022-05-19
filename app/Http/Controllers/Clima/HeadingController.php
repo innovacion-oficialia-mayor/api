@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 
 class HeadingController extends Controller {
   /**
@@ -31,21 +30,11 @@ class HeadingController extends Controller {
     ]);
 
     $sortBy = Arr::get($query, 'sortBy', 'asc');
-    $limit  = Arr::get($query, 'limit', 15);
+    $limit  = Arr::get($query, 'limit', 1);
 
-    return HeadingResource::collection(Heading::with([
-    'factors' => function($query) use ($sortBy) {
-      $query->orderBy('id', $sortBy);
-    },
-    'factors.questions' => function($query) use ($sortBy) {
-      $query->orderBy('id', $sortBy);
-    },
-    'factors.questions.options' => function($query) use ($sortBy) {
-      $query->orderBy('id', $sortBy);
-    },
-    ])
-    ->orderBy('id', $sortBy)
-    ->paginate($limit))
+    return HeadingResource::collection(Heading::orderBy('id', $sortBy)
+    ->paginate($limit)
+    ->withQueryString())
     ->additional([
       'message' => [
         'type' => 'success',

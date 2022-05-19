@@ -44,7 +44,8 @@ class UserController extends Controller {
     ->orderBy('name', $sortBy)
     ->orderBy('firstsurname', $sortBy)
     ->orderBy('secondsurname', $sortBy)
-    ->paginate($limit))
+    ->paginate($limit)
+    ->withQueryString())
     ->additional([
       'message' => [
         'type' => 'success',

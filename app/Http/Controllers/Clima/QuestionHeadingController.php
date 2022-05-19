@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\Clima;
 
 use App\Http\Controllers\Controller;
-use App\Models\Clima\Factor;
-use App\Http\Resources\Clima\FactorResource;
+use App\Models\Clima\Heading;
+use App\Http\Resources\Clima\HeadingResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 
-class FactorController extends Controller {
+class QuestionHeadingController extends Controller {
   /**
    * Create a new controller instance.
    *
@@ -31,18 +30,22 @@ class FactorController extends Controller {
     ]);
 
     $sortBy = Arr::get($query, 'sortBy', 'asc');
-    $limit  = Arr::get($query, 'limit', 15);
+    $limit  = Arr::get($query, 'limit', 3);
 
-    return FactorResource::collection(Factor::with(['heading',
-    'questions' => function($query) use ($sortBy) {
+    return HeadingResource::collection(Heading::with([
+    'factors' => function($query) use ($sortBy) {
       $query->orderBy('id', $sortBy);
     },
-    'questions.options' => function($query) use ($sortBy) {
+    'factors.questions' => function($query) use ($sortBy) {
+      $query->orderBy('id', $sortBy);
+    },
+    'factors.questions.options' => function($query) use ($sortBy) {
       $query->orderBy('id', $sortBy);
     },
     ])
     ->orderBy('id', $sortBy)
-    ->paginate($limit))
+    ->paginate($limit)
+    ->withQueryString())
     ->additional([
       'message' => [
         'type' => 'success',
