@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin\JobLevel;
-use App\Http\Resources\Admin\JobLevelResource;
+use App\Models\Admin\Dependency;
+use App\Http\Resources\Admin\DependencyResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Arr;
 
-class JobLevelController extends Controller {
+class DependencyAreaController extends Controller {
   /**
    * Create a new controller instance.
    *
@@ -32,14 +32,18 @@ class JobLevelController extends Controller {
     $q = Arr::get($query, 'q', '');
     $sortOrder = Arr::get($query, 'sortOrder', 'asc');
 
-    return JobLevelResource::collection(JobLevel::where('name', 'like', "%${q}%")
-    ->orderBy('name',  $sortOrder)
+    return DependencyResource::collection(Dependency::with(['type',
+    'areas' => function($query) use ($sortOrder) {
+      $query->orderBy('name', $sortOrder);
+    }])
+    ->where('name', 'like', "%${q}%")
+    ->orderBy('name', $sortOrder)
     ->get())
     ->additional([
       'message' => [
         'type' => 'success',
         'code' => Response::HTTP_OK,
-        'description' => 'Jobs level list.',
+        'description' => 'Dependency and area list.',
     ]]);
   }
 }

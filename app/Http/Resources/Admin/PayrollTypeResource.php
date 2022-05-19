@@ -15,9 +15,6 @@ class PayrollTypeResource extends JsonResource {
   public function toArray($request) {
     return [
       'id' => $this->id,
-      'payroll_type_category_id' => $this->whenPivotLoaded('payroll_types_categories', function () {
-        return $this->pivot->id;
-      }),
       'name' => $this->name,
       'categories' => PayrollCategoryResource::collection($this->whenLoaded('categories')),
     ];

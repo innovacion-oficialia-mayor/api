@@ -25,22 +25,22 @@ class DependencyController extends Controller {
      * Valida los parámetros de consulta de la ruta.
      */
     $query = $this->validate($request, [
-      'sortBy' => ['bail', 'nullable', 'string', Rule::in(['asc', 'desc'])],
+      'q' => 'bail|nullable|string|max:255',
+      'sortOrder' => ['bail', 'nullable', 'string', Rule::in(['asc', 'desc'])],
     ]);
 
-    $sortBy = Arr::get($query, 'sortBy', 'asc');
+    $q = Arr::get($query, 'q', '');
+    $sortOrder = Arr::get($query, 'sortOrder', 'asc');
 
-    return DependencyResource::collection(Dependency::with(['type',
-    'areas' => function($query) use ($sortBy) {
-      $query->orderBy('name', $sortBy);
-    }])
-    ->orderBy('name', $sortBy)
+    return DependencyResource::collection(Dependency::with('type')
+    ->where('name', 'like', "%${q}%")
+    ->orderBy('name', $sortOrder)
     ->get())
     ->additional([
       'message' => [
         'type' => 'success',
         'code' => Response::HTTP_OK,
-        'description' => '',
+        'description' => 'Dependency list.',
     ]]);
   }
 }

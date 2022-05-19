@@ -3,7 +3,6 @@
 namespace App\Http\Resources\Admin;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\Admin\DependencyResource;
 
 class AreaResource extends JsonResource {
   /**
@@ -18,8 +17,7 @@ class AreaResource extends JsonResource {
       'dependency_area_id' => $this->whenPivotLoaded('dependency_areas', function () {
         return $this->pivot->id;
       }),
-      'name' => $this->name,
-      'dependencies' => DependencyResource::collection($this->whenLoaded('dependencies')),
+      'name' => $this->name
     ];
   }
 }
