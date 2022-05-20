@@ -16,10 +16,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
   public $incrementing = false;
   protected $keyType  = 'string';
   protected $fillable = [
-    'id', 'payroll', 'email', 'role_id',
-    'gender_id', 'job_id', 'job_level_id',
+    'id', 'fullname', 'payroll', 'phone', 'email',
+    'role_id', 'gender_id', 'job_id', 'job_level_id',
     'payroll_type_category_id', 'dependency_area_id',
-    'name', 'firstsurname', 'secondsurname', 'phone',
     'password', 'active', 'entered_at',
   ];
   protected $attributes = ['active' => false];

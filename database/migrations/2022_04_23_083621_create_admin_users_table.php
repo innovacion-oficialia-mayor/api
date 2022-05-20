@@ -71,11 +71,7 @@ return new class extends Migration {
             ->restrictOnUpdate()
             ->restrictOnDelete();
 
-      $table->string('name', 60);
-
-      $table->string('firstsurname', 60);
-
-      $table->string('secondsurname', 60);
+      $table->string('fullname', 255);
 
       $table->string('phone', 10);
 

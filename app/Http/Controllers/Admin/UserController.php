@@ -13,6 +13,8 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use App\Helpers;
 
 class UserController extends Controller {
   /**
@@ -29,28 +31,31 @@ class UserController extends Controller {
      * Valida los parámetros de consulta de la ruta.
      */
     $query = $this->validate($request, [
-      'sortBy' => ['bail', 'nullable', 'string', Rule::in(['asc', 'desc'])],
+      'filter' => ['bail', 'nullable', 'string', Rule::in(['fullname', 'payroll'])],
+      'q' => 'bail|nullable|string|max:255',
       'limit' => 'bail|nullable|integer|min:1',
+      'sortOrder' => ['bail', 'nullable', 'string', Rule::in(['asc', 'desc'])],
     ]);
 
-    $sortBy = Arr::get($query, 'sortBy', 'asc');
+    $filter = Arr::get($query, 'filter', 'fullname');
+    $q = Helpers::trim(Arr::get($query, 'q', ''));
     $limit  = Arr::get($query, 'limit', 15);
+    $sortOrder = Arr::get($query, 'sortOrder', 'asc');
 
     return UserResource::collection(User::with([
       'role', 'gender', 'job', 'jobLevel', 'payrollTypeCategory.type',
       'payrollTypeCategory.category', 'dependencyArea.dependency',
       'dependencyArea.area',
     ])
-    ->orderBy('name', $sortBy)
-    ->orderBy('firstsurname', $sortBy)
-    ->orderBy('secondsurname', $sortBy)
+    ->orderBy('fullname', $sortOrder)
+    ->where($filter, 'like', "%${q}%")
     ->paginate($limit)
     ->withQueryString())
     ->additional([
       'message' => [
         'type' => 'success',
         'code' => Response::HTTP_OK,
-        'description' => '',
+        'description' => 'User list.',
     ]]);
   }
 
@@ -59,7 +64,9 @@ class UserController extends Controller {
      * Valida los campos de la petición.
      */
     $input = $this->validate($request, [
+      'fullname' => 'bail|required|string|max:255',
       'payroll' => 'bail|required|string|min:5|max:10|unique:App\Models\Admin\User',
+      'phone'  => 'bail|required|string|min:10|max:10',
       'email'   => 'bail|nullable|email|max:255|unique:App\Models\Admin\User',
       'role_id' => 'bail|required|integer|min:1|exists:App\Models\Admin\Role,id',
       'gender_id' => 'bail|required|integer|min:1|exists:App\Models\Admin\Gender,id',
@@ -67,10 +74,6 @@ class UserController extends Controller {
       'job_level_id' => 'bail|required|integer|min:1|exists:App\Models\Admin\JobLevel,id',
       'payroll_type_category_id' => 'bail|required|integer|min:1|exists:App\Models\Admin\PayrollTypesCategory,id',
       'dependency_area_id' => 'bail|required|integer|min:1|exists:App\Models\Admin\DependencyArea,id',
-      'name' => 'bail|required|string|max:60',
-      'firstsurname'  => 'bail|required|string|max:60',
-      'secondsurname' => 'bail|required|string|max:60',
-      'phone'  => 'bail|required|string|min:10|max:10',
       'password' => ['bail', 'nullable', Password::defaults(), 'confirmed'],
       'active' => 'bail|nullable|boolean',
       'entered_at' => 'bail|required|date_format:Y/m/d,Y-m-d',
@@ -83,6 +86,7 @@ class UserController extends Controller {
       ]);
 
     $input['id'] = Str::uuid();
+    $input['fullname'] = Str::of(Helpers::trim($input['fullname']))->title();
 
     if (Arr::exists($input, 'password'))
       $input['password'] = Hash::make($input['password']);
@@ -99,13 +103,20 @@ class UserController extends Controller {
       'message' => [
         'type' => 'success',
         'code' => Response::HTTP_CREATED,
-        'description' => '',
+        'description' => 'User data.',
     ]])
     ->response()
     ->setStatusCode(Response::HTTP_CREATED);
   }
 
   public function show(Request $request, $id) {
+    /**
+     * Valida los parámetros de la ruta.
+     */
+    Validator::make(['id' => $id], [
+      'id' => 'bail|required|uuid',
+    ])->validated();
+
     return (new UserResource(User::with([
       'role', 'gender', 'job', 'jobLevel', 'payrollTypeCategory.type',
       'payrollTypeCategory.category', 'dependencyArea.dependency',
@@ -116,31 +127,39 @@ class UserController extends Controller {
       'message' => [
         'type' => 'success',
         'code' => Response::HTTP_OK,
-        'description' => '',
+        'description' => 'Registered a new user.',
     ]]);
   }
 
   public function update(Request $request, $id) {
     /**
+     * Valida los parámetros de la ruta.
+     */
+    Validator::make(['id' => $id], [
+      'id' => 'bail|required|uuid',
+    ])->validated();
+
+    /**
      * Valida los campos de la petición.
      */
     $input = $this->validate($request, [
+      'fullname' => 'bail|nullable|string|max:255',
       'payroll' => 'bail|nullable|string|min:5|max:10|unique:App\Models\Admin\User',
-      'email'   => 'bail|nullable|string|max:255|email|unique:App\Models\Admin\User',
+      'phone'  => 'bail|nullable|string|min:10|max:10',
+      'email'   => 'bail|nullable|email|max:255|unique:App\Models\Admin\User',
       'role_id' => 'bail|nullable|integer|min:1|exists:App\Models\Admin\Role,id',
       'gender_id' => 'bail|nullable|integer|min:1|exists:App\Models\Admin\Gender,id',
       'job_id' => 'bail|nullable|integer|min:1|exists:App\Models\Admin\Job,id',
       'job_level_id' => 'bail|nullable|integer|min:1|exists:App\Models\Admin\JobLevel,id',
       'payroll_type_category_id' => 'bail|nullable|integer|min:1|exists:App\Models\Admin\PayrollTypesCategory,id',
       'dependency_area_id' => 'bail|nullable|integer|min:1|exists:App\Models\Admin\DependencyArea,id',
-      'name' => 'bail|nullable|string|max:60',
-      'firstsurname'  => 'bail|nullable|max:60',
-      'secondsurname' => 'bail|nullable|max:60',
-      'phone'  => 'bail|nullable|min:10|max:10',
       'password' => ['bail', 'nullable', Password::defaults(), 'confirmed'],
       'active' => 'bail|nullable|boolean',
       'entered_at' => 'bail|nullable|date_format:Y/m/d,Y-m-d',
     ]);
+
+    if (Arr::exists($input, 'fullname'))
+      $input['fullname'] = Str::of(Helpers::trim($input['fullname']))->title();
 
     if (Arr::exists($input, 'password'))
       $input['password'] = Hash::make($input['password']);
@@ -159,7 +178,7 @@ class UserController extends Controller {
       'message' => [
         'type' => 'success',
         'code' => Response::HTTP_OK,
-        'description' => '',
+        'description' => 'Modified user data.',
     ]]);
   }
 }
