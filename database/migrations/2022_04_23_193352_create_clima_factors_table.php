@@ -25,7 +25,7 @@ return new class extends Migration {
             ->restrictOnUpdate()
             ->restrictOnDelete();
 
-      $table->string('name', 255)
+      $table->string('name', 256)
             ->unique();
     });
   }

@@ -17,7 +17,7 @@ return new class extends Migration {
     Schema::create('options', function (Blueprint $table) {
       $table->tinyIncrements('id');
 
-      $table->string('body', 255)
+      $table->string('body', 256)
             ->unique();
     });
   }

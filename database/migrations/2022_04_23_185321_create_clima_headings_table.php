@@ -17,7 +17,7 @@ return new class extends Migration {
     Schema::create('headings', function (Blueprint $table) {
       $table->tinyIncrements('id');
 
-      $table->string('name', 255)
+      $table->string('name', 256)
             ->unique();
     });
   }

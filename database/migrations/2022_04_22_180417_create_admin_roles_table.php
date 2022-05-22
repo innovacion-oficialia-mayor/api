@@ -15,10 +15,10 @@ return new class extends Migration {
     Schema::create('roles', function (Blueprint $table) {
       $table->tinyIncrements('id');
 
-      $table->string('name', 20)
+      $table->string('name', 24)
             ->unique();
 
-      $table->string('description', 255);
+      $table->string('description', 256);
     });
   }
 

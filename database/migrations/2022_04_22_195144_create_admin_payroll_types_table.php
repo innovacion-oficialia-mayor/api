@@ -15,7 +15,7 @@ return new class extends Migration {
     Schema::create('payroll_types', function (Blueprint $table) {
       $table->tinyIncrements('id');
 
-      $table->string('name', 20)
+      $table->string('name', 24)
             ->unique();
     });
   }

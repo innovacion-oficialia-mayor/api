@@ -64,10 +64,10 @@ class UserController extends Controller {
      * Valida los campos de la petición.
      */
     $input = $this->validate($request, [
-      'fullname' => 'bail|required|string|max:255',
+      'fullname' => 'bail|required|string|max:256',
       'payroll' => 'bail|required|string|min:5|max:10|unique:App\Models\Admin\User',
       'phone'  => 'bail|required|string|min:10|max:10',
-      'email'   => 'bail|nullable|email|max:255|unique:App\Models\Admin\User',
+      'email'   => 'bail|nullable|email|max:256|unique:App\Models\Admin\User',
       'role_id' => 'bail|required|integer|min:1|exists:App\Models\Admin\Role,id',
       'gender_id' => 'bail|required|integer|min:1|exists:App\Models\Admin\Gender,id',
       'job_id' => 'bail|required|integer|min:1|exists:App\Models\Admin\Job,id',
@@ -143,10 +143,10 @@ class UserController extends Controller {
      * Valida los campos de la petición.
      */
     $input = $this->validate($request, [
-      'fullname' => 'bail|nullable|string|max:255',
+      'fullname' => 'bail|nullable|string|max:256',
       'payroll' => 'bail|nullable|string|min:5|max:10|unique:App\Models\Admin\User',
       'phone'  => 'bail|nullable|string|min:10|max:10',
-      'email'   => 'bail|nullable|email|max:255|unique:App\Models\Admin\User',
+      'email'   => 'bail|nullable|email|max:256|unique:App\Models\Admin\User',
       'role_id' => 'bail|nullable|integer|min:1|exists:App\Models\Admin\Role,id',
       'gender_id' => 'bail|nullable|integer|min:1|exists:App\Models\Admin\Gender,id',
       'job_id' => 'bail|nullable|integer|min:1|exists:App\Models\Admin\Job,id',

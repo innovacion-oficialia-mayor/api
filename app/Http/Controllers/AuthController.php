@@ -26,8 +26,8 @@ class AuthController extends Controller {
    */
   public function adminLogin(Request $request) {
     $credentials = $this->validate($request, [
-      'email' => 'bail|required|email|max:255',
-      'password' => 'bail|required|string|max:255',
+      'email' => 'bail|required|email|max:256',
+      'password' => 'bail|required|string|max:256',
     ]);
 
     $credentials['active'] = true;

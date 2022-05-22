@@ -25,7 +25,7 @@ return new class extends Migration {
             ->restrictOnUpdate()
             ->restrictOnDelete();
 
-      $table->string('body', 560);
+      $table->string('body', 1024);
     });
   }
 

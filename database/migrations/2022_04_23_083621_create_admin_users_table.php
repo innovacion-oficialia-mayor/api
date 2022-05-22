@@ -19,7 +19,7 @@ return new class extends Migration {
       $table->string('payroll', 10)
             ->unique();
 
-      $table->string('email', 255)
+      $table->string('email', 256)
             ->nullable()
             ->unique();
 
@@ -71,11 +71,11 @@ return new class extends Migration {
             ->restrictOnUpdate()
             ->restrictOnDelete();
 
-      $table->string('fullname', 255);
+      $table->string('fullname', 256);
 
       $table->string('phone', 10);
 
-      $table->string('password', 255)
+      $table->string('password', 256)
             ->nullable();
 
       $table->boolean('active')
