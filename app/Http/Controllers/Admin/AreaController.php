@@ -25,7 +25,7 @@ class AreaController extends Controller {
      * Valida los parámetros de consulta de la ruta.
      */
     $query = $this->validate($request, [
-      'q' => 'bail|nullable|string|max:255',
+      'q' => 'bail|nullable|string|max:256',
       'sortOrder' => ['bail', 'nullable', 'string', Rule::in(['asc', 'desc'])],
     ]);
 

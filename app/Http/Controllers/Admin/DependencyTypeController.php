@@ -25,7 +25,7 @@ class DependencyTypeController extends Controller {
      * Valida los parámetros de consulta de la ruta.
      */
     $query = $this->validate($request, [
-      'q' => 'bail|nullable|string|max:20',
+      'q' => 'bail|nullable|string|max:24',
       'sortOrder' => ['bail', 'nullable', 'string', Rule::in(['asc', 'desc'])],
     ]);
 
@@ -48,7 +48,7 @@ class DependencyTypeController extends Controller {
      * Valida los parámetros de consulta de la ruta.
      */
     $query = $this->validate($request, [
-      'q' => 'bail|nullable|string|max:20',
+      'q' => 'bail|nullable|string|max:24',
       'sortOrder' => ['bail', 'nullable', 'string', Rule::in(['asc', 'desc'])],
     ]);
 

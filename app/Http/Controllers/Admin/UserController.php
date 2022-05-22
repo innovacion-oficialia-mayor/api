@@ -32,7 +32,7 @@ class UserController extends Controller {
      */
     $query = $this->validate($request, [
       'filter' => ['bail', 'nullable', 'string', Rule::in(['fullname', 'payroll'])],
-      'q' => 'bail|nullable|string|max:255',
+      'q' => 'bail|nullable|string|max:256',
       'limit' => 'bail|nullable|integer|min:1',
       'sortOrder' => ['bail', 'nullable', 'string', Rule::in(['asc', 'desc'])],
     ]);
