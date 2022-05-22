@@ -108,6 +108,14 @@ $router->group(['prefix' => '/v1/admin', /* 'middleware' => ['auth:api', 'can:ad
     $router->get('/', ['as' => 'index', 'uses' => 'AreaController@index']);
   });
   $router->group(['prefix' => '/users', 'as' => 'users'], function () use ($router) {
+    $router->group(['prefix' => '/dependency', 'as' => 'dependency'], function () use ($router) {
+      $router->group(['prefix' => '/area', 'as' => 'area'], function () use ($router) {
+        /**
+         * Coincide con la ruta /v1/users/dependency/area/{id} y el nombre 'admin.users.dependency.area.dependencyArea'.
+         */
+        $router->get('/{id}', ['as' => 'dependencyArea', 'uses' => 'UserController@dependencyArea']);
+      });
+    });
     /**
      * Coincide con la ruta /v1/admin/users y el nombre 'admin.users.index'.
      */

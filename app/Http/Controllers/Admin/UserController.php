@@ -26,7 +26,7 @@ class UserController extends Controller {
     //
   }
 
-  public function index(Request $request){
+  public function index(Request $request) {
     /**
      * Valida los parámetros de consulta de la ruta.
      */
@@ -47,8 +47,8 @@ class UserController extends Controller {
       'payrollTypeCategory.category', 'dependencyArea.dependency',
       'dependencyArea.area',
     ])
-    ->orderBy('fullname', $sortOrder)
     ->where($filter, 'like', "%${q}%")
+    ->orderBy('fullname', $sortOrder)
     ->paginate($limit)
     ->withQueryString())
     ->additional([
@@ -179,6 +179,47 @@ class UserController extends Controller {
         'type' => 'success',
         'code' => Response::HTTP_OK,
         'description' => 'Modified user data.',
+    ]]);
+  }
+
+  public function dependencyArea(Request $request, $id) {
+    /**
+     * Valida los parámetros de la ruta.
+     */
+    Validator::make(['id' => $id], [
+      'id' => 'bail|required|integer|min:1',
+    ])->validated();
+
+    /**
+     * Valida los parámetros de consulta de la ruta.
+     */
+    $query = $this->validate($request, [
+      'filter' => ['bail', 'nullable', 'string', Rule::in(['fullname', 'payroll'])],
+      'q' => 'bail|nullable|string|max:256',
+      'limit' => 'bail|nullable|integer|min:1',
+      'sortOrder' => ['bail', 'nullable', 'string', Rule::in(['asc', 'desc'])],
+    ]);
+
+    $filter = Arr::get($query, 'filter', 'fullname');
+    $q = Helpers::trim(Arr::get($query, 'q', ''));
+    $limit  = Arr::get($query, 'limit', 15);
+    $sortOrder = Arr::get($query, 'sortOrder', 'asc');
+
+    return UserResource::collection(User::with([
+      'role', 'gender', 'job', 'jobLevel', 'payrollTypeCategory.type',
+      'payrollTypeCategory.category', 'dependencyArea.dependency',
+      'dependencyArea.area',
+    ])
+    ->where('dependency_area_id', $id)
+    ->where($filter, 'like', "%${q}%")
+    ->orderBy('fullname', $sortOrder)
+    ->paginate($limit)
+    ->withQueryString())
+    ->additional([
+      'message' => [
+        'type' => 'success',
+        'code' => Response::HTTP_OK,
+        'description' => 'User list.',
     ]]);
   }
 }
