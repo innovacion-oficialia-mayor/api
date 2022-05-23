@@ -17,7 +17,7 @@ class OptionResource extends JsonResource {
       'question_option_id' => $this->whenPivotLoaded('question_options', function () {
         return $this->pivot->id;
       }),
-      'body' => $this->body
+      'body' => $this->body,
     ];
   }
 }

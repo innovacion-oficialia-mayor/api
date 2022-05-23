@@ -17,7 +17,7 @@ class AreaResource extends JsonResource {
       'dependency_area_id' => $this->whenPivotLoaded('dependency_areas', function () {
         return $this->pivot->id;
       }),
-      'name' => $this->name
+      'name' => $this->name,
     ];
   }
 }

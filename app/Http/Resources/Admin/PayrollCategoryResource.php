@@ -17,7 +17,7 @@ class PayrollCategoryResource extends JsonResource {
       'payroll_type_category_id' => $this->whenPivotLoaded('payroll_types_categories', function () {
         return $this->pivot->id;
       }),
-      'name'  => $this->name
+      'name'  => $this->name,
     ];
   }
 }

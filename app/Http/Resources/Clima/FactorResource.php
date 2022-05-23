@@ -18,7 +18,7 @@ class FactorResource extends JsonResource {
       'id' => $this->id,
       'name' => $this->name,
       'heading' => new HeadingResource($this->whenLoaded('heading')),
-      'questions' => QuestionResource::collection($this->whenLoaded('questions'))
+      'questions' => QuestionResource::collection($this->whenLoaded('questions')),
     ];
   }
 }

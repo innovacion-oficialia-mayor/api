@@ -38,7 +38,7 @@ class HomeController extends Controller {
       'message' => [
         'type' => 'success',
         'code' => Response::HTTP_OK,
-        'description' => ''
+        'description' => 'Info.'
       ]
     ];
   }
