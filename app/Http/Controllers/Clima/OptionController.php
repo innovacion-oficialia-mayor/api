@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Clima;
 
 use App\Http\Controllers\Controller;
-use App\Models\Clima\Heading;
-use App\Http\Resources\Clima\HeadingResource;
+use App\Models\Clima\Option;
+use App\Http\Resources\Clima\OptionResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Arr;
 
-class HeadingController extends Controller {
+class OptionController extends Controller {
   /**
    * Create a new controller instance.
    *
@@ -26,23 +26,20 @@ class HeadingController extends Controller {
      */
     $query = $this->validate($request, [
       'q' => 'bail|nullable|string|max:256',
-      'limit' => 'bail|nullable|integer|min:1',
       'sortOrder' => ['bail', 'nullable', 'string', Rule::in(['asc', 'desc'])],
     ]);
 
     $q = Arr::get($query, 'q', '');
-    $limit  = Arr::get($query, 'limit', 1);
     $sortOrder = Arr::get($query, 'sortOrder', 'asc');
 
-    return HeadingResource::collection(Heading::where('name', 'like', "%${q}%")
-    ->orderBy('name', $sortOrder)
-    ->paginate($limit)
-    ->withQueryString())
+    return OptionResource::collection(Option::where('body', 'like', "%${q}%")
+    ->orderBy('id', $sortOrder)
+    ->get())
     ->additional([
       'message' => [
         'type' => 'success',
         'code' => Response::HTTP_OK,
-        'description' => 'Heading list.',
+        'description' => 'Option list.',
     ]]);
   }
 }

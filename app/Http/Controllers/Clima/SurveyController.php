@@ -26,21 +26,21 @@ class SurveyController extends Controller {
      * Valida los parámetros de consulta de la ruta.
      */
     $query = $this->validate($request, [
-      'sortBy' => ['bail', 'nullable', 'string', Rule::in(['asc', 'desc'])],
+      'sortOrder' => ['bail', 'nullable', 'string', Rule::in(['asc', 'desc'])],
       'limit' => 'bail|nullable|integer|min:1',
     ]);
 
-    $sortBy = Arr::get($query, 'sortBy', 'desc');
+    $sortOrder = Arr::get($query, 'sortOrder', 'desc');
     $limit  = Arr::get($query, 'limit', 15);
 
-    return SurveyResource::collection(Survey::orderBy('created_at', $sortBy)
+    return SurveyResource::collection(Survey::orderBy('created_at', $sortOrder)
     ->paginate($limit)
     ->withQueryString())
     ->additional([
       'message' => [
         'type' => 'success',
         'code' => Response::HTTP_OK,
-        'description' => '',
+        'description' => 'Survey list.',
     ]]);
   }
 
@@ -64,7 +64,7 @@ class SurveyController extends Controller {
       'message' => [
         'type' => 'success',
         'code' => Response::HTTP_CREATED,
-        'description' => '',
+        'description' => 'Registered a new survey.',
     ]])
     ->response()
     ->setStatusCode(Response::HTTP_CREATED);

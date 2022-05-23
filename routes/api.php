@@ -111,9 +111,9 @@ $router->group(['prefix' => '/v1/admin', /* 'middleware' => ['auth:api', 'can:ad
     $router->group(['prefix' => '/dependency', 'as' => 'dependency'], function () use ($router) {
       $router->group(['prefix' => '/area', 'as' => 'area'], function () use ($router) {
         /**
-         * Coincide con la ruta /v1/users/dependency/area/{id} y el nombre 'admin.users.dependency.area.dependencyArea'.
+         * Coincide con la ruta /v1/users/dependency/area/{id} y el nombre 'admin.users.dependency.area.show'.
          */
-        $router->get('/{id}', ['as' => 'dependencyArea', 'uses' => 'UserController@dependencyArea']);
+        $router->get('/{id}', ['as' => 'show', 'uses' => 'UserController@dependencyAreaShow']);
       });
     });
     /**
@@ -130,6 +130,18 @@ $router->group(['prefix' => '/v1/admin', /* 'middleware' => ['auth:api', 'can:ad
  * Clima Laboral y Cultura Organizacional.
  */
 $router->group(['prefix' => '/v1/clima', /* 'middleware' => ['auth:api', 'can:admin'], */ 'namespace' => 'Clima', 'as' => 'clima'], function () use ($router) {
+  $router->group(['prefix' => '/headings', 'as' => 'headings'], function () use ($router) {
+    /**
+     * Coincide con la ruta /v1/clima/headings y el nombre 'clima.headings.index'.
+     */
+    $router->get('/',  ['as' => 'index', 'uses' => 'HeadingController@index']);
+  });
+  $router->group(['prefix' => '/options', 'as' => 'options'], function () use ($router) {
+    /**
+     * Coincide con la ruta /v1/clima/options y el nombre 'clima.options.index'.
+     */
+    $router->get('/',  ['as' => 'index', 'uses' => 'OptionController@index']);
+  });
   $router->group(['prefix' => '/surveys', 'as' => 'surveys'], function () use ($router) {
     /**
      * Coincide con la ruta /v1/clima/surveys y el nombre 'clima.surveys.index'.
@@ -137,27 +149,24 @@ $router->group(['prefix' => '/v1/clima', /* 'middleware' => ['auth:api', 'can:ad
     $router->get('/',  ['as' => 'index', 'uses' => 'SurveyController@index']);
     $router->post('/', ['as' => 'store', 'uses' => 'SurveyController@store']);
   });
-
-  $router->group(['prefix' => '/headings', 'as' => 'headings'], function () use ($router) {
-    /**
-     * Coincide con la ruta /v1/clima/headings y el nombre 'clima.headings.index'.
-     */
-    $router->get('/',  ['as' => 'index', 'uses' => 'HeadingController@index']);
-  });
-
-  $router->group(['prefix' => '/questions', 'as' => 'questions'], function () use ($router) {
-    $router->group(['prefix' => '/headings', 'as' => 'headings'], function () use ($router) {
+  $router->group(['prefix' => '/factors', 'as' => 'factors'], function () use ($router) {
+    $router->group(['prefix' => '/questions', 'as' => 'questions'], function () use ($router) {
       /**
-       * Coincide con la ruta /v1/clima/questions/headings y el nombre 'clima.questions.headings.index'.
+       * Coincide con la ruta /v1/clima/factors/questions/heading/{id} y el nombre 'clima.factors.questions.heading.show'.
        */
-      $router->get('/',  ['as' => 'index', 'uses' => 'QuestionHeadingController@index']);
+      $router->get('/heading/{id}', ['as' => 'show', 'uses' => 'FactorController@questionsHeadingShow']);
     });
-    $router->group(['prefix' => '/factors', 'as' => 'factors'], function () use ($router) {
+    /**
+     * Coincide con la ruta /v1/clima/factors y el nombre 'clima.factors.index'.
+     */
+    $router->get('/', ['as' => 'index', 'uses' => 'FactorController@index']);
+  });
+  $router->group(['prefix' => '/questions', 'as' => 'questions'], function () use ($router) {
+    $router->group(['prefix' => '/options', 'as' => 'options'], function () use ($router) {
       /**
-       * Coincide con la ruta /v1/clima/questions/factors/heading/{id} y el nombre 'clima.questions.factors.heading'.
+       * Coincide con la ruta /v1/clima/questions/options y el nombre 'clima.questions.options.index'.
        */
-      $router->get('/heading/{id}',  ['as' => 'heading', 'uses' => 'QuestionFactorController@heading']);
-      $router->get('/',              ['as' => 'index',   'uses' => 'QuestionFactorController@index']);
+      $router->get('/',  ['as' => 'index', 'uses' => 'QuestionOptionController@index']);
     });
     /**
      * Coincide con la ruta /v1/clima/questions y el nombre 'clima.questions.index'.

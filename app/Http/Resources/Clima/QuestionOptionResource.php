@@ -3,10 +3,10 @@
 namespace App\Http\Resources\Clima;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\Clima\FactorResource;
+use App\Http\Resources\Clima\QuestionResource;
 use App\Http\Resources\Clima\OptionResource;
 
-class QuestionResource extends JsonResource {
+class QuestionOptionResource extends JsonResource {
   /**
    * Transform the resource into an array.
    *
@@ -16,9 +16,8 @@ class QuestionResource extends JsonResource {
   public function toArray($request) {
     return [
       'id' => $this->id,
-      'body' => $this->body,
-      'factor' => new FactorResource($this->whenLoaded('factor')),
-      'options' => OptionResource::collection($this->whenLoaded('options'))
+      'question' => new QuestionResource($this->whenLoaded('question')),
+      'option' => new OptionResource($this->whenLoaded('option')),
     ];
   }
 }

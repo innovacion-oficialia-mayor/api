@@ -103,7 +103,7 @@ class UserController extends Controller {
       'message' => [
         'type' => 'success',
         'code' => Response::HTTP_CREATED,
-        'description' => 'User data.',
+        'description' => 'Registered a new user.',
     ]])
     ->response()
     ->setStatusCode(Response::HTTP_CREATED);
@@ -127,7 +127,7 @@ class UserController extends Controller {
       'message' => [
         'type' => 'success',
         'code' => Response::HTTP_OK,
-        'description' => 'Registered a new user.',
+        'description' => 'User data.',
     ]]);
   }
 
@@ -182,7 +182,7 @@ class UserController extends Controller {
     ]]);
   }
 
-  public function dependencyArea(Request $request, $id) {
+  public function dependencyAreaShow(Request $request, $id) {
     /**
      * Valida los parámetros de la ruta.
      */

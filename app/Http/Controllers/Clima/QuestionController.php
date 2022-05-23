@@ -25,25 +25,22 @@ class QuestionController extends Controller {
      * Valida los parámetros de consulta de la ruta.
      */
     $query = $this->validate($request, [
-      'sortBy' => ['bail', 'nullable', 'string', Rule::in(['asc', 'desc'])],
+      'sortOrder' => ['bail', 'nullable', 'string', Rule::in(['asc', 'desc'])],
       'limit' => 'bail|nullable|integer|min:1',
     ]);
 
-    $sortBy = Arr::get($query, 'sortBy', 'asc');
+    $sortOrder = Arr::get($query, 'sortOrder', 'asc');
     $limit  = Arr::get($query, 'limit', 15);
 
-    return QuestionResource::collection(Question::with(['factor', 'factor.heading',
-    'options' => function($query) use ($sortBy) {
-      $query->orderBy('id', $sortBy);
-    }])
-    ->orderBy('id', $sortBy)
+    return QuestionResource::collection(Question::with(['factor', 'factor.heading'])
+    ->orderBy('id', $sortOrder)
     ->paginate($limit)
     ->withQueryString())
     ->additional([
       'message' => [
         'type' => 'success',
         'code' => Response::HTTP_OK,
-        'description' => '',
+        'description' => 'Question list.',
     ]]);
   }
 }

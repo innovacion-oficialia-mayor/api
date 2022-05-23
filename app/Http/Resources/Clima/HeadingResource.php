@@ -3,7 +3,6 @@
 namespace App\Http\Resources\Clima;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\Clima\FactorResource;
 
 class HeadingResource extends JsonResource {
   /**
@@ -15,8 +14,7 @@ class HeadingResource extends JsonResource {
   public function toArray($request) {
     return [
       'id' => $this->id,
-      'name' => $this->name,
-      'factors' => FactorResource::collection($this->whenLoaded('factors'))
+      'name' => $this->name
     ];
   }
 }
