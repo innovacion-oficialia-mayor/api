@@ -10,6 +10,7 @@ use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 
 class SurveyController extends Controller {
   /**
@@ -68,5 +69,26 @@ class SurveyController extends Controller {
     ]])
     ->response()
     ->setStatusCode(Response::HTTP_CREATED);
+  }
+
+  public function destroy(Request $request, $id) {
+    /**
+     * Valida los parámetros de la ruta.
+     */
+    Validator::make(['id' => $id], [
+      'id' => 'bail|required|uuid',
+    ])->validated();
+
+    $survey = Survey::findOrFail($id);
+
+    $survey->delete();
+
+    return (new SurveyResource($survey))
+    ->additional([
+      'message' => [
+        'type' => 'success',
+        'code' => Response::HTTP_OK,
+        'description' => 'The survey was deleted.',
+    ]]);
   }
 }

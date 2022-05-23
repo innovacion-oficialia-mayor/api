@@ -148,6 +148,7 @@ $router->group(['prefix' => '/v1/clima', /* 'middleware' => ['auth:api', 'can:ad
      */
     $router->get('/',  ['as' => 'index', 'uses' => 'SurveyController@index']);
     $router->post('/', ['as' => 'store', 'uses' => 'SurveyController@store']);
+    $router->delete('/{id}', ['as' => 'destroy', 'uses' => 'SurveyController@destroy']);
   });
   $router->group(['prefix' => '/factors', 'as' => 'factors'], function () use ($router) {
     $router->group(['prefix' => '/questions', 'as' => 'questions'], function () use ($router) {
